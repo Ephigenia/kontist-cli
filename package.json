@@ -1,0 +1,63 @@
+{
+  "author": "Ephigenia M. Eichner",
+  "name": "kontist-cli",
+  "description": "command line interface tool for kontist banking",
+  "version": "0.0.0",
+  "type": "module",
+  "preferGlobal": true,
+  "keywords": [
+    "automation",
+    "banking",
+    "bill",
+    "cli",
+    "commandline",
+    "invoice",
+    "kontist",
+    "tool",
+    "transactions"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "source/",
+    "package.json",
+    "package-lock.json",
+    "LICENSE"
+  ],
+  "maintainer": {
+    "name": "Marcel Eichner",
+    "email": "marcel.eichner@ephigenia.de"
+  },
+  "contributors": [
+    {
+      "name": "Marcel Eichner",
+      "email": "marcel.eichner@ephigenia.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ephigenia/ikea-availability-checker.git"
+  },
+  "funding": {
+    "url": "http://github.com/sponsors/Ephigenia"
+  },
+  "bugs": {
+    "url": "https://github.com/Ephigenia/ikea-availability-checker/issues"
+  },
+  "main": "source/cli.js",
+  "bin": {
+    "kontist-cli": "source/cli.js"
+  },
+  "scripts": {
+    "start": "node source/cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "commander": "8.3.0",
+    "conf": "10.1.1",
+    "kontist": "0.36.11",
+    "readline-sync": "1.4.10"
+  }
+}

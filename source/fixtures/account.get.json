@@ -1,0 +1,10 @@
+{
+  "iban": "DE20210101015392121735",
+  "bic": "SOEKDEB3XXX",
+  "balance": 5020,
+  "availableBalance": 6020,
+  "cardHolderRepresentation": "BRUCE/BANNER",
+  "cardHolderRepresentations": [ "BRUCE/BANNER" ],
+  "hasPendingCardFraudCase": false,
+  "canCreateOverdraft": true
+}
