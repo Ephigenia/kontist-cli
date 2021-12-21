@@ -1,0 +1,16 @@
+{
+  "id": "847b5a130246d3e2361a0361fb2a23adctx",
+  "recipient": "Bruce Banner",
+  "iban": "DE12340304151432178400",
+  "amount": 9182,
+  "status": "CONFIRMED",
+  "executeAt": null,
+  "lastExecutionDate": null,
+  "purpose": null,
+  "e2eId": "E-1234a2dea4b7ac87662dee26ff5d414e",
+  "reoccurrence": null,
+  "nextOccurrence": null,
+  "category": null,
+  "userSelectedBookingDate": null,
+  "personalNote": null
+}

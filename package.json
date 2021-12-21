@@ -1,0 +1,76 @@
+{
+  "author": "Ephigenia M. Eichner",
+  "name": "kontist-cli",
+  "description": "command line interface tool for kontist banking",
+  "version": "0.0.0",
+  "type": "module",
+  "preferGlobal": true,
+  "keywords": [
+    "automation",
+    "banking",
+    "bill",
+    "cli",
+    "command-line-tool",
+    "commandline",
+    "invoice",
+    "kontist",
+    "money",
+    "tool",
+    "transaction",
+    "transactions",
+    "transfer"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "files": [
+    "source/",
+    "package.json",
+    "package-lock.json",
+    "LICENSE"
+  ],
+  "maintainer": {
+    "name": "Marcel Eichner",
+    "email": "marcel.eichner@ephigenia.de"
+  },
+  "contributors": [
+    {
+      "name": "Marcel Eichner",
+      "email": "marcel.eichner@ephigenia.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ephigenia/kontist-cli.git"
+  },
+  "funding": {
+    "url": "http://github.com/sponsors/Ephigenia"
+  },
+  "bugs": {
+    "url": "https://github.com/Ephigenia/kontist-cli/issues"
+  },
+  "main": "source/cli.js",
+  "bin": {
+    "kontist-cli": "source/cli.js"
+  },
+  "scripts": {
+    "lint:fix": "npm run -s lint -- --fix",
+    "lint": "eslint ./source",
+    "start": "node source/cli.js",
+    "test:ci": "npm run -s test",
+    "test": "mocha \"source/**/*.test.js\""
+  },
+  "dependencies": {
+    "commander": "8.3.0",
+    "conf": "10.1.1",
+    "kontist": "0.36.11",
+    "readline-sync": "1.4.10"
+  },
+  "devDependencies": {
+    "chai": "4.3.4",
+    "eslint": "8.5.0",
+    "eslint-plugin-unicorn": "39.0.0",
+    "mocha": "9.1.3"
+  }
+}
