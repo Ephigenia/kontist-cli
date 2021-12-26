@@ -5,13 +5,13 @@ import { BIN_NAME } from './constants.js';
 class ApplicationError extends Error {
   constructor(message) {
     super(message);
-		this.name = 'ApplicationError';
+    this.name = 'ApplicationError';
   }
 }
 class ApplicationConfigurationError extends ApplicationError {
   constructor(message) {
     super(message);
-		this.name = 'ApplicationConfigurationError';
+    this.name = 'ApplicationConfigurationError';
   }
 }
 class ApplicationMissingConfigurationError extends ApplicationConfigurationError {

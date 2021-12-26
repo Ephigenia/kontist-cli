@@ -2,6 +2,9 @@ name: default
 
 on: [push]
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
 jobs:
   lint:
     name: Lint Code Base

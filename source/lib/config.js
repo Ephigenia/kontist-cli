@@ -31,9 +31,9 @@ const schema = {
     // optional locale to be used when formatting money values
     type: 'string',
   },
-	refreshToken: {
-		type: 'string',
-	},
+  refreshToken: {
+    type: 'string',
+  },
   scopes: {
     type: 'array',
     default: SCOPES_DEFAULT,
