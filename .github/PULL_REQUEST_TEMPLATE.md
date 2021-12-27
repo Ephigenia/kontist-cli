@@ -9,8 +9,6 @@ and can be deleted.
 Please submit pull requests against the develop branch.
 
 Follow the existing code style. Check the tests succeed, including lint.
-  npm run test
-  npm run lint
 
 Don't update the CHANGELOG or command version number. That gets done by maintainers when preparing the release.
 
