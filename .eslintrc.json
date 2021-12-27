@@ -1,5 +1,5 @@
 {
   "extends": [
-	  "plugin:unicorn/all"
+    "plugin:unicorn/all"
   ]
 }
