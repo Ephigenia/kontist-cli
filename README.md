@@ -20,6 +20,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 # Setup
 
 - Valid client id for authentication. Request your client id in the API Client Management on https://kontist.dev/client-management/.
+- Create Access- & Refresh Token (valid for 1year) and store in system user preferences:
     ```
     kontist-cli login -c <oauth-client-id> -u <username> -p <password>
     ```

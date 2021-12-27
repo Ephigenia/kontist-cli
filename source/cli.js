@@ -9,4 +9,5 @@ program
   .command('login', 'configuration of login & authorization', { executableFile: 'cli-login'})
   .command('transfer', 'TODO', { executableFile: 'cli-transfer' })
   .command('transactions', 'list transactions', { executableFile: 'cli-transactions' })
+  .command('subscribe', 'TODO', { executableFile: 'cli-subscribe' })
   .parse();
