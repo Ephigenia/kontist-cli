@@ -21,8 +21,10 @@ async function run(iban, recipient, amount, purpose) {
   // TODO validate amount
   // TODO validate recipient
 
+  // TODO add double-confirmation for all budgets above a specific limit (20?)
+
   const parameters = {
-    amount: 1,
+    amount,
     // TODO e2eId (optional)
     iban,
     purpose,
