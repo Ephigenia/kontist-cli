@@ -7,7 +7,6 @@ env:
 
 jobs:
   lint:
-    name: Lint Code Base
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
