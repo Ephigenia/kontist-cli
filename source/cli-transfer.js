@@ -7,17 +7,25 @@ import config from './lib/config.js';
 
 const program = new Command();
 program
-  .arguments('[iban] [recipient] [amount] [purpose]', {
-    iban: 'TODO',
-    recipient: 'TODO',
+  .arguments('[iban] [recipient] [amount] [purpose] [e2eId]', {
     amount: 'TODO',
+    e2eId: 'TODO',
+    iban: 'TODO',
     purpose: 'TODO',
+    recipient: 'TODO',
   })
   .action(run)
   // TODO add search https://kontist.dev/sdk/#transactions-search
   .parseAsync();
 
-async function run(iban, recipient, amount, purpose) {
+async function run(
+  iban,
+  recipient,
+  amount,
+  purpose,
+  // eslint-disable-next-line unicorn/prevent-abbreviations
+  e2eId,
+) {
   // TODO validate amount
   // TODO validate recipient
 
@@ -25,7 +33,7 @@ async function run(iban, recipient, amount, purpose) {
 
   const parameters = {
     amount,
-    // TODO e2eId (optional)
+    e2eId,
     iban,
     purpose,
     recipient,
