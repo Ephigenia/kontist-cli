@@ -15,12 +15,13 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 - [x] money format?
 - [x] currency?
 - [ ] list transactions
-    - [ ] limit transactions
+    - [x] limit transactions
     - [ ] paginate transactions
     - [x] search transactions
 - [ ] get future transactions
 - [ ] categorize single transaction (https://kontist.dev/sdk/#categorize-a-transaction)
 - [ ] listen for new transactions (https://kontist.dev/sdk/#subscribe-to-new-transactions)
+- [ ] auto-completion
 
 # Setup
 
@@ -35,7 +36,7 @@ The command-line-tool does not include any table formater or filtering mechanism
 
 Both tools in combination can be used to create a nice-looking, customizable list of transactions:
 
-    kontist-cli transactions | jq -c 'map({bookingDate, valutaData,amount,name,iban})' | npx table-printer-cli -s
+    kontist-cli transactions | jq -c 'map({bookingDate,valutaDate,amount,name,iban})' | npx table-printer-cli -s
 
 Some other command rely on the systems `LC_ALL`, `LC_TIME`, or `LC_NUMERIC` variables to format monetary values or provide additional formatted dates. The `balance` sub-command:
 
