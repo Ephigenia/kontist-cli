@@ -17,7 +17,3 @@ fi
 
 printf "%b>>>%b lint...\n" "$GREEN" "$NO_COLOR"
 npm run lint -s
-
-printf "%b>>>%b test...\n" "$GREEN" "$NO_COLOR"
-npm test
-
