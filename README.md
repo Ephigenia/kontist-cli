@@ -27,8 +27,9 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 
 - Valid client id for authentication. Request your client id in the API Client Management on https://kontist.dev/client-management/.
     ```
-    kontist-cli login -c <oauth-client-id> -u <username> -p <password>
+    kontist-cli login <oauth-client-id> <username>
     ```
+    you’ll be promted for the password
 
 # Examples
 

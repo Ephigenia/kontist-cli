@@ -23,8 +23,7 @@ async function run(
   recipient,
   amount,
   purpose,
-  // eslint-disable-next-line unicorn/prevent-abbreviations
-  e2eId,
+  endToEndId
 ) {
   // TODO validate amount
   // TODO validate recipient
@@ -33,7 +32,7 @@ async function run(
 
   const parameters = {
     amount,
-    e2eId,
+    e2eId: endToEndId,
     iban,
     purpose,
     recipient,
