@@ -6,6 +6,11 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 
 - [x] get current balance (`kontist-cli balance`, returns availableBalance)
 - [ ] make transaction `kontist-cli` … in progress
+- [ ] standing order(s)
+    - [ ] list
+    - [ ] make standing order (https://kontist.dev/sdk/#create-a-standing-order)
+    - [ ] update standing order (https://kontist.dev/sdk/#updating-a-standing-order)
+    - [ ] delete standing order
 - [ ] make timed transaction https://kontist.dev/sdk/#create-a-timed-order
 - [x] money format?
 - [x] currency?
