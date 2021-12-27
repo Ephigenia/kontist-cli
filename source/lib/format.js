@@ -14,11 +14,14 @@ function formatDateTime(value, locale, options) {
 function formatTransaction(config, transaction) {
   const locale = config.get('locale');
   const currency = config.get('currency');
-  // TODO IBAN formatter
-  transaction.amountF = formatCurrency(transaction.amount, locale, currency);
-  transaction.bookingDateF = formatDateTime(transaction.bookingDate, locale);
-  transaction.createdAtF = formatCurrency(transaction.createdAt, locale, currency);
-  transaction.valutaDateF = formatDateTime(transaction.valutaDate, locale);
+  return {
+    // TODO IBAN formatter
+    ...transaction,
+    amountF: formatCurrency(transaction.amount, locale, currency),
+    bookingDateF: formatDateTime(transaction.bookingDate, locale),
+    createdAtF: formatCurrency(transaction.createdAt, locale, currency),
+    valutaDateF: formatDateTime(transaction.valutaDate, locale),
+  };
 }
 
 export {
