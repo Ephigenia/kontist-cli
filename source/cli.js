@@ -8,5 +8,5 @@ program
   .command('balance', 'currently available balance', { executableFile: 'cli-balance' })
   .command('login', 'configuration of login & authorization', { executableFile: 'cli-login'})
   .command('transfer', 'TODO', { executableFile: 'cli-transfer' })
-  .command('transactions', 'list transactions', { executableFile: 'cli-transactions' })
+  .command('transactions', 'list transactions', { executableFile: 'cli-transactions', isDefault: true })
   .parse();
