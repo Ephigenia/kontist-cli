@@ -12,6 +12,10 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [ ] update standing order (https://kontist.dev/sdk/#updating-a-standing-order)
     - [ ] delete standing order
 - [ ] make timed transaction https://kontist.dev/sdk/#create-a-timed-order
+- [ ] cards
+    - [ ] list
+    - [ ] block
+    - [ ] unblock
 - [ ] invoice
     - [ ] list
     - [ ] add product
