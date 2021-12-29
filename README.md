@@ -45,15 +45,16 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
         kontist-cli transfer create --account accountName <iban> <recipient> <amount>
         ```
 - [ ] cards
-    - [ ] list `kontist-cli cards list`
-        - [ ] including card settings
+    - [x] list `kontist-cli cards list`
+        - [x] including card settings
         - [ ] including card limits
-    - [ ] get specific card `kontist-cli cards <id>`
-    - [ ] block `kontist-cli cards block <id>` (`changeCardStatus`)
-    - [ ] unblock `kontist-cli cards unblock <id>` (`changeCardStatus`)
+    - [x] get specific card `kontist-cli cards <id>`
+    - [x] block `kontist-cli cards block <id>` (`changeCardStatus`)
+    - [x] unblock `kontist-cli cards unblock <id>` (`changeCardStatus`)
+    - [x] set pin `kontist-cli cards pin <id>` (`changePIN`)
     - [ ] replace `kontist-cli cards replace <id>` (`replaceCard`)
     - [ ] reorder `kontist-cli cards reorder <id>` (`reorderCard`)
-    - [ ] update card settings / limits
+    - [ ] update card settings / limits (`CardSettingsInput`)
 - [ ] invoice
     - [ ] list
     - [ ] update invoice

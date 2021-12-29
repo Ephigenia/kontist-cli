@@ -1,0 +1,25 @@
+[
+  {
+    "id": "cac1ae1613561b68ed149102adba9480mcrd",
+    "status": "ACTIVE",
+    "type": "VIRTUAL_VISA_FREELANCE_DEBIT",
+    "holder": "BRUCE BANNER",
+    "formattedExpirationDate": "12/26",
+    "maskedPan": "124971******1643",
+    "pinSet": false,
+    "addedToApplePay": true,
+    "settings": {
+      "contactlessEnabled": true
+    },
+    "googlePayTokens": [
+      {
+        "walletId": "0EFF2E122ED45ECC",
+        "tokenRefId": "ABCTHE123435531234274899"
+      },
+      {
+        "walletId": "0EB12E139FE25ECC",
+        "tokenRefId": "XYZTHE123435587432500115"
+      }
+    ]
+  }
+]
