@@ -8,7 +8,6 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [x] get current balance
     - [ ] different output when availableBalance doesn’t match balance
 - [ ] status command returns current overall status
-- [ ] 
 - [ ] add multiple output formats
     - [ ] `--pretty` as table
     - [ ] `--json` as json (default)
