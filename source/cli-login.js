@@ -8,7 +8,7 @@ import config from './lib/config.js';
 
 const program = new Command();
 program
-  .arguments('[clientId] [username]')
+  .arguments('<clientId> <username>')
   .option('-p, --password <password>', 'TODO')
   .option('-s, --secret <clientSecret>', 'optional oauth client secret to be used')
   // TODO add optional option to set scopes (which may be not correct)

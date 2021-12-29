@@ -7,7 +7,7 @@ import config from './lib/config.js';
 
 const program = new Command();
 program
-  .arguments('[iban] [recipient] [amount] [purpose] [e2eId]', {
+  .arguments('<iban> <recipient> <amount> [purpose] [e2eId]', {
     amount: 'TODO',
     e2eId: 'TODO',
     iban: 'TODO',
