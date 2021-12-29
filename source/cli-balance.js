@@ -13,9 +13,7 @@ program
     'using the configured currency (defaults to "EUR") and the systems ' +
     'default locale when formatting the value.'
   )
-  .option('--plain', 'no formatting, just print the available balance')
-  // TODO add option to disable number formatting and plain print the value
-  //      for easy use in shell scripts
+  .option('--plain', 'no formatting, just print the available balance in cents')
   .addHelpText('after', `
 Examples:
 
@@ -33,9 +31,6 @@ async function run() {
   const client = await createDefaultClient(config.get());
   const accountInfo = await client.models.account.get();
 
-  // TODO check if "availableBalance" matches "balance" and
-  //      show it somehow in the output
-  // TODO add a notification when there’s a card fraud in progress?
   const { balance, availableBalance } = accountInfo;
 
   if (options.plain) {

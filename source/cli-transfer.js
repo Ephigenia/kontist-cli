@@ -7,23 +7,33 @@ import config from './lib/config.js';
 
 const program = new Command();
 program
-  .arguments('[iban] [recipient] [amount] [purpose]', {
-    iban: 'TODO',
-    recipient: 'TODO',
-    amount: 'TODO',
-    purpose: 'TODO',
+  .arguments('<iban> <recipient> <amount> [purpose] [e2eId]', {
+    amount: 'cents',
+    e2eId: 'SEPA transfer id',
+    iban: 'recipient IBAN',
+    purpose: undefined,
+    recipient: 'the name of the recipient',
   })
+  .option('--dry-run', 'don’t do anything, print infos only')
   .action(run)
-  // TODO add search https://kontist.dev/sdk/#transactions-search
   .parseAsync();
 
-async function run(iban, recipient, amount, purpose) {
+async function run(
+  iban,
+  recipient,
+  amount,
+  purpose,
+  endToEndId
+) {
+  const options = program.opts();
   // TODO validate amount
   // TODO validate recipient
 
+  // TODO add double-confirmation for all budgets above a specific limit (20?)
+
   const parameters = {
-    amount: 1,
-    // TODO e2eId (optional)
+    amount,
+    e2eId: endToEndId,
     iban,
     purpose,
     recipient,
@@ -31,6 +41,10 @@ async function run(iban, recipient, amount, purpose) {
 
   console.log('Please confirm that you want to make the following transfer');
   console.log(parameters);
+
+  if (options.dryRun) {
+    process.exit(0);
+  }
 
   // TODO research common option display, uppercase for default, but which order
   const confirmation = readlineSync.question('Do you confirm N/y ');
