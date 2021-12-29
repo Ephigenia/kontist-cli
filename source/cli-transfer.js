@@ -14,6 +14,7 @@ program
     purpose: 'TODO',
     recipient: 'TODO',
   })
+  .option('--dry-run', 'don’t do anything, print infos only')
   .action(run)
   // TODO add search https://kontist.dev/sdk/#transactions-search
   .parseAsync();
@@ -25,6 +26,7 @@ async function run(
   purpose,
   endToEndId
 ) {
+  const options = program.opts();
   // TODO validate amount
   // TODO validate recipient
 
@@ -40,6 +42,10 @@ async function run(
 
   console.log('Please confirm that you want to make the following transfer');
   console.log(parameters);
+
+  if (options.dryRun) {
+    process.exit(0);
+  }
 
   // TODO research common option display, uppercase for default, but which order
   const confirmation = readlineSync.question('Do you confirm N/y ');
