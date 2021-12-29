@@ -8,15 +8,14 @@ import config from './lib/config.js';
 const program = new Command();
 program
   .arguments('<iban> <recipient> <amount> [purpose] [e2eId]', {
-    amount: 'TODO',
-    e2eId: 'TODO',
-    iban: 'TODO',
-    purpose: 'TODO',
-    recipient: 'TODO',
+    amount: 'cents',
+    e2eId: 'SEPA transfer id',
+    iban: 'recipient IBAN',
+    purpose: undefined,
+    recipient: 'the name of the recipient',
   })
   .option('--dry-run', 'don’t do anything, print infos only')
   .action(run)
-  // TODO add search https://kontist.dev/sdk/#transactions-search
   .parseAsync();
 
 async function run(

@@ -7,6 +7,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 - [x] balance (`kontist-cli balance`, returns `availableBalance`)
     - [x] get current balance
     - [ ] different output when availableBalance doesn’t match balance
+    - [ ] add notification when card fraud is on
 - [ ] status command returns current overall status
 - [ ] add multiple output formats
     - [ ] `--pretty` as table

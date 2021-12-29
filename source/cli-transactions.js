@@ -14,8 +14,9 @@ program
   .arguments('[query]', {
     query: 'optional string to search in the transactions'
   })
+  // TODO improve the description every time a feature is added
   .description(
-    `TODO`
+    `list transaction`
   )
   // TODO add pagination
   .option('--limit <limit>', 'number of transactions to show, (0-50)', parseInt)

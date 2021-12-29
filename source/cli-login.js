@@ -8,10 +8,24 @@ import config from './lib/config.js';
 
 const program = new Command();
 program
-  .arguments('<clientId> <username>')
-  .option('-p, --password <password>', 'TODO')
+  .arguments('<clientId> <username>', {
+    'clientId': 'kontist oauth client id',
+    'username': '',
+  })
+  .option('-p, --password <password>', 'acccount password, better: consider tty in password, see examples')
   .option('-s, --secret <clientSecret>', 'optional oauth client secret to be used')
   // TODO add optional option to set scopes (which may be not correct)
+  .addHelpText('after', `
+Examples:
+  Login with user-prompt for password
+    ${BIN_NAME} 12c03e59-b6da-4bf1-a1d7-2510690db95c email@host.de
+
+  Login with with (random) password
+    pwgen 20 1 | xargs echo | ${BIN_NAME} 12c03e59-b6da-4bf1-a1d7-2510690db95c email@host.de --password stupid
+
+  Unsafe password pass
+    ${BIN_NAME} 12c03e59-b6da-4bf1-a1d7-2510690db95c email@host.de
+  `)
   .action(run)
   .parseAsync();
 
