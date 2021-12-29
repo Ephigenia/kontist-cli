@@ -12,6 +12,9 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [ ] update standing order (https://kontist.dev/sdk/#updating-a-standing-order)
     - [ ] delete standing order
 - [ ] make timed transaction https://kontist.dev/sdk/#create-a-timed-order
+- [ ] cards
+    - [ ] list cards
+    - [ ] 
 - [ ] invoice
     - [ ] list
     - [ ] add product
@@ -53,3 +56,6 @@ Some other command rely on the systems `LC_ALL`, `LC_TIME`, or `LC_NUMERIC` vari
 - [Netnexus/IKontist](https://github.com/netnexus/IKontist)
 - [N26 CLI (Python)](https://github.com/femueller/python-n26)
 - [Teller CLI](https://github.com/sebinsua/teller-cli)
+
+- [Kontist DEV](https://kontist.dev)
+- [Kontist GraphQL Playground](https://kontist.dev/playground/)

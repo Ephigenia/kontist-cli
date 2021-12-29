@@ -1,0 +1,33 @@
+{
+  "invoice": {
+    "id": "ayeab370-ebbd-46d3-ac1c-884721f528ef",
+    "status": "DRAFT",
+    "invoiceNumber": null,
+    "dueDate": "2022-01-27T18:03:05.000Z",
+    "note": "Leistungsdatum entspricht Rechnungsdatum.",
+    "customer": {
+      "id": "ab524201-1a8f-412c-908c-28cfb2465ddc",
+      "name": "Avengers Inc.",
+      "vatNumber": "US127162/126",
+      "taxNumber": "",
+      "address": "890 Fifth Avenue\nManhattan New York",
+      "country": "United States"
+    },
+    "products": [
+      {
+        "id": "e321b2f6-2ee3-4edd-1234-87d0615fc6e3",
+        "description": "Scientific Research",
+        "quantity": 281,
+        "price": 2500,
+        "vat": "16"
+      },
+      {
+        "id": "f321b2f6-2ee3-4edd-1234-87d0615fc6e5",
+        "description": "Use-Case Research",
+        "quantity": 81,
+        "price": 3500,
+        "vat": "16"
+      }
+    ]
+  }
+}
