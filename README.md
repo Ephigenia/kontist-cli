@@ -81,14 +81,15 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
         - [x] confirmation mfa
         - [ ] timed order
             ```
-            kontist-cli transfer create <iban> <recipient> <amount> --executeAt <executionDate>
+            kontist-cli transfer create <iban> <recipient> <amount> \
+                --executeAt <executionDate>
             ```
         - [ ] standing order with additional [StandingOrderReoccurenceType](https://kontist.dev/docs/#standingorderreoccurrencetype)
             ```
             kontist-cli transfer create <iban> <recipient> <amount> \
-              --executeAt <executionDate>` \
-              --lastExecutionTime <optionalDate> \
-              --reoccurence <reoccurenceType>;
+                --executeAt <executionDate>` \
+                --lastExecutionTime <optionalDate> \
+                --reoccurence <reoccurenceType>;
             ```
     - [ ] updateate
         - [ ] [update standing order](https://kontist.dev/sdk/#updating-a-standing-order)
