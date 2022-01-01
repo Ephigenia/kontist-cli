@@ -9,7 +9,7 @@ program
   .command('balance', 'currently available balance', { executableFile: 'cli-balance' })
   .command('cards', 'TODO cards', { executableFile: 'cli-cards' })
   .command('login', 'configuration of login & authorization', { executableFile: 'cli-login'})
-  .command('subscribe', 'TODO', { executableFile: 'cli-subscribe' })
+  .command('watch', 'listen for new transactions', { executableFile: 'cli-watch' })
   .command('transactions', 'list transactions', { executableFile: 'cli-transactions', isDefault: true })
   .command('transfer', 'money transfer, timed, standing', { executableFile: 'cli-transfer' })
   .parse();

@@ -95,7 +95,8 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [ ] updateate
         - [ ] [update standing order](https://kontist.dev/sdk/#updating-a-standing-order)
         - [ ] [categorize transaction](https://kontist.dev/sdk/#categorize-a-transaction) ([TransactionCategory](https://kontist.dev/docs/#transactioncategory))
-    - [ ] listen for new transactions (https://kontist.dev/sdk/#subscribe-to-new-transactions)
+    - [x] listen for new transactions (https://kontist.dev/sdk/#subscribe-to-new-transactions)
+        - [ ] update description with working jstbl / ctp command for prettier display
 - [ ] cli auto-completion
 - [ ] maintenance tasks
     - [ ] publish on NPM
