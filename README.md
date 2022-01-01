@@ -86,9 +86,9 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
         - [ ] standing order with additional [StandingOrderReoccurenceType](https://kontist.dev/docs/#standingorderreoccurrencetype)
             ```
             kontist-cli transfer create <iban> <recipient> <amount> \
-              --executeAt <executionDate>` \
-              --lastExecutionTime <optionalDate> \
-              --reoccurence <reoccurenceType>;
+                --executeAt <executionDate>` \
+                --lastExecutionTime <optionalDate> \
+                --reoccurence <reoccurenceType>;
             ```
     - [ ] updateate
         - [ ] [update standing order](https://kontist.dev/sdk/#updating-a-standing-order)
