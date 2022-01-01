@@ -25,10 +25,7 @@
     "node": ">=16.0.0"
   },
   "files": [
-    "source/",
-    "package.json",
-    "package-lock.json",
-    "LICENSE"
+    "source/"
   ],
   "maintainer": {
     "name": "Marcel Eichner",
