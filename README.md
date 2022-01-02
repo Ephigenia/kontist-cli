@@ -69,6 +69,24 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
         - [x] limit transactions
         - [x] search transactions
         - [ ] paginate transactions
+        - [ ] filter transactions
+            - [ ] short filter for incoming / outgoing
+                ```
+                kontist-cli transfer list --outgoing
+                kontist-cli transfer list --incoming
+                ```
+            - [ ] by date-range 
+                ```
+                kontist-cli transfer list --from 2021-01-01 --to 2021-02-32
+                ```
+            - [ ] by date-range names
+                ```
+                kontist-cli transfer list this-month;
+                kontist-cli transfer list last-month;
+                kontist-cli transfer list this-year;
+                kontist-cli transfer list today;
+                kontist-cli transfer list yesterday;
+                ```
     - [ ] cancel
         ```
         kontist-cli transfer create <iban> <recipient> <amount>
