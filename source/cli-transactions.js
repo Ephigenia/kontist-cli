@@ -29,7 +29,7 @@ Examples:
     ${BIN_NAME} transactions --limit 5
 
   Transform JSON to tabular output using jq and table-printer-cli
-    ${BIN_NAME} transactions | jq -c 'map({bookingDateF,valutaDateF,amountF,name,category,personalNote})' | npx table-printer-cli -s
+    ${BIN_NAME} transactions | jq -c 'map({valutaDateF,amountF,name,purpose})' | ctp -s
 
   Use a different locale for formatting the monetary values:
     LC_ALL=de-de ${BIN_NAME} transactions

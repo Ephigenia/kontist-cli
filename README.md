@@ -8,11 +8,12 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [x] get current balance
     - [ ] different output when availableBalance doesn’t match balance
     - [ ] add notification when card fraud is on
+- [ ] option to permanently set different LC_ALL
 - [ ] status command returns current overall status
 - [ ] add multiple output formats
     - [ ] `--pretty` as table
     - [ ] `--json` as json (default)
-    - [ ] `--text` as tabular text (easy for additional processing with `xargs`)
+    - [ ] `--plain` as tsv (easy for additional processing with `xargs`)
 - [ ] multi-account
     - [ ] add account (name defaults to "default")
         ```
@@ -116,7 +117,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 - [ ] cli auto-completion
 - [ ] maintenance tasks
     - [ ] publish on NPM
-    - [ ] use version from package.json
+    - [x] use version from package.json
     - [ ] setup semantic release
     - [ ] setup discussions
 
