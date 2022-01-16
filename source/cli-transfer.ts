@@ -1,29 +1,28 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import readlineSync from 'readline-sync';
+import { CreateTransferInput } from 'kontist/dist/lib/graphql/schema';
+import * as readlineSync from 'readline-sync';
 
-import { createDefaultClient } from './lib/client.js';
-import config from './lib/config.js';
+import { createDefaultClient } from './lib/client';
+import config from './lib/config';
 
 const program = new Command();
 program
-  .arguments('<iban> <recipient> <amount> [purpose] [e2eId]', {
-    amount: 'cents',
-    e2eId: 'SEPA transfer id',
-    iban: 'recipient IBAN',
-    purpose: undefined,
-    recipient: 'the name of the recipient',
-  })
+  .argument('<iban>', 'IBAN')
+  .argument('<recipient>', 'recipient name')
+  .argument('<amount>', 'amount in cents (f.e. 2134 are 21.34)')
+  .argument('<purpose>', 'recipient IBAN')
+  .argument('<e2eId>', 'end to end id, reference')
   .option('--dry-run', 'don’t do anything, print infos only')
   .action(run)
   .parseAsync();
 
 async function run(
-  iban,
-  recipient,
-  amount,
-  purpose,
-  endToEndId
+  iban: string,
+  recipient: string,
+  amount: string,
+  purpose: string,
+  endToEndId: string,
 ) {
   const options = program.opts();
   // TODO validate amount
@@ -31,8 +30,8 @@ async function run(
 
   // TODO add double-confirmation for all budgets above a specific limit (20?)
 
-  const parameters = {
-    amount,
+  const parameters: CreateTransferInput = {
+    amount: parseFloat(amount),
     e2eId: endToEndId,
     iban,
     purpose,
@@ -49,11 +48,13 @@ async function run(
   // TODO research common option display, uppercase for default, but which order
   const confirmation = readlineSync.question('Do you confirm N/y ');
   if (!['y', 'Y'].includes(confirmation)) {
-    console.log('no confirmation given, stopping here, no transaction was made');
+    console.log(
+      'no confirmation given, stopping here, no transaction was made',
+    );
     process.exit(0);
   }
 
-  const client = await createDefaultClient(config.get());
+  const client = await createDefaultClient(config);
   const confirmationId = await client.models.transfer.createOne(parameters);
 
   console.log('requests confirmation code, please enter the OTP when prompted');
@@ -65,7 +66,7 @@ async function run(
   // wait for sms
   const result = await client.models.transfer.confirmOne(
     confirmationId,
-    otpToken
+    otpToken,
   );
   // example in transaction.result.tmp.json
   console.log(result);
@@ -73,4 +74,4 @@ async function run(
   // TODO possible exception happened when amount was 0
   //      GraphQLError: Error when creating wire transfer
   // at GraphQLError.KontistSDKError [as constructor] (/Users/ephigenia/Development/kontist/node_modules/kontist/dist/lib/errors.js:46:28)
-};
+}

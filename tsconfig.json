@@ -1,0 +1,22 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "target": "ES2015",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "types": [
+      "node",
+      "mocha"
+    ],
+    "moduleResolution": "node",
+    "outDir": "dist"
+  },
+  "include": ["source/**/*.ts"],
+  "exclude": [
+    "node_modules"
+  ]
+}

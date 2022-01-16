@@ -1,6 +1,17 @@
-import Conf from 'conf';
+import Conf, { Schema } from 'conf';
 
-const SCOPES_DEFAULT = [
+export interface KontistConfiguration {
+  accessToken: string;
+  refreshToken: string;
+  clientId: string;
+  clientSecret?: string;
+  scopes?: string[];
+  currency?: string;
+  locale: string;
+  timeZone: string;
+}
+
+export const SCOPES_DEFAULT = [
   'accounts',
   'offline',
   'statements',
@@ -12,7 +23,7 @@ const SCOPES_DEFAULT = [
 
 // schema definition for validating configuration values
 // SEE https://json-schema.org/understanding-json-schema/
-const schema = {
+const schema: Schema<KontistConfiguration> = {
   accessToken: {
     type: 'string',
   },
@@ -44,10 +55,10 @@ const schema = {
   },
   timeZone: {
     type: 'string',
-  }
+  },
 };
 
-const config = new Conf({
+const config = new Conf<KontistConfiguration>({
   projectName: 'kontist-cli-dev',
   projectVersion: '0.0.0-dev',
   schema,

@@ -6,5 +6,11 @@
 node_modules
 npm-debug.log
 
+# output
+dist
+
+coverage/
+.nyc_output/
+
 local.*
 *.tmp*

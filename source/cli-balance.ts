@@ -1,20 +1,22 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 
-import { BIN_NAME } from './lib/constants.js';
-import { createDefaultClient } from './lib/client.js';
-import { formatCurrency } from './lib/format.js';
-import config from './lib/config.js';
+import { BIN_NAME } from './lib/constants';
+import { createDefaultClient } from './lib/client';
+import { formatCurrency } from './lib/format';
+import config from './lib/config';
 
 const program = new Command();
 program
   .description(
     'Print the currently available balance of the configured account while ' +
-    'using the configured currency (defaults to "EUR") and the systems ' +
-    'default locale when formatting the value.'
+      'using the configured currency (defaults to "EUR") and the systems ' +
+      'default locale when formatting the value.',
   )
   .option('--plain', 'no formatting, just print the available balance in cents')
-  .addHelpText('after', `
+  .addHelpText(
+    'after',
+    `
 Examples:
 
   Use a different locale for formatting the number:
@@ -22,21 +24,31 @@ Examples:
 
   Just print the available balance without any formatting
     ${BIN_NAME} balance --plain
-  `)
+  `,
+  )
   .action(run)
   .parseAsync();
 
 async function run() {
   const options = program.opts();
-  const client = await createDefaultClient(config.get());
+  const client = await createDefaultClient(config);
   const accountInfo = await client.models.account.get();
-
-  const { balance, availableBalance } = accountInfo;
+  if (!accountInfo) {
+    throw new Error('Unable to get account info');
+  }
+  // TODO balance
+  const { availableBalance } = accountInfo;
 
   if (options.plain) {
     console.log(availableBalance);
     process.exit(0);
   }
 
-  console.log(formatCurrency(availableBalance, config.get('locale'), config.get('currency')));
-};
+  console.log(
+    formatCurrency(
+      availableBalance,
+      config.get('locale') as string,
+      config.get('currency') as string,
+    ),
+  );
+}
