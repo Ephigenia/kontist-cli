@@ -1,0 +1,21 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "node",
+      "mocha"
+    ],
+    "moduleResolution": "node",
+    "outDir": "dist",
+  },
+  "include": ["source"],
+  "exclude": ["node_modules"]
+}

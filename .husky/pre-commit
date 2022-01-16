@@ -16,4 +16,7 @@ fi
 . "$(dirname "$0")/_/husky.sh"
 
 printf "%b>>>%b lint...\n" "$GREEN" "$NO_COLOR"
-npm run lint -s
+npm run lint:fix -s
+
+printf "%b>>>%b prettier...\n" "$GREEN" "$NO_COLOR"
+npm run format

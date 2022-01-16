@@ -1,26 +1,24 @@
 #!/usr/bin/env node
-import { Command, InvalidArgumentError } from 'commander';
+import { Command } from 'commander';
 
-import { BIN_NAME } from './lib/constants.js';
-import { createDefaultClient } from './lib/client.js';
-import { formatTransaction } from './lib/format.js';
-import config from './lib/config.js';
-import { parseInt } from './lib/option-parser.js';
+import { BIN_NAME } from './lib/constants';
+import { createDefaultClient } from './lib/client';
+import { formatTransaction } from './lib/format';
+import config from './lib/config';
+import { parseInt } from './lib/option-parser';
 
 const program = new Command();
 program
+  .description(`list transaction`)
   // TODO add capability of using TransactionFilter properties
   // TODO add option to client side reverse the ordering
-  .arguments('[query]', {
-    query: 'optional string to search in the transactions'
-  })
+  .argument('[query]', 'optional string to search in the transactions')
   // TODO improve the description every time a feature is added
-  .description(
-    `list transaction`
-  )
   // TODO add pagination
   .option('--limit <limit>', 'number of transactions to show, (0-50)', parseInt)
-  .addHelpText('after', `
+  .addHelpText(
+    'after',
+    `
 Examples:
   Search for transactions
     ${BIN_NAME} transactions -q "IKEA"
@@ -39,14 +37,15 @@ Examples:
 
   Get the IDs of transactions (f.e. for using with xargs)
     ${BIN_NAME} transactions IKEA | jq -r -c '.[].id'
-  `)
+  `,
+  )
   .action(run)
   .parseAsync();
 
-async function run(query) {
+async function run(query?: string) {
   const options = program.opts();
 
-  const client = await createDefaultClient(config.get());
+  const client = await createDefaultClient(config);
 
   let transactionList;
   if (query) {
@@ -59,6 +58,6 @@ async function run(query) {
     transactionList = await client.models.transaction.fetch(queryArguments);
   }
 
-  const items = transactionList.items.map(formatTransaction.bind(this, config));
+  const items = transactionList.items.map((t) => formatTransaction(config, t));
   console.log(JSON.stringify(items));
-};
+}
