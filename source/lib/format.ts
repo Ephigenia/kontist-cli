@@ -34,7 +34,7 @@ export function formatTransaction(
     ...transaction,
     amountF: formatCurrency(transaction.amount, locale, currency),
     bookingDateF: formatDateTime(transaction.bookingDate, locale),
-    createdAtF: formatCurrency(transaction.createdAt, locale, currency),
+    createdAtF: formatDateTime(transaction.createdAt, locale),
     valutaDateF: formatDateTime(transaction.valutaDate, locale),
   };
 }

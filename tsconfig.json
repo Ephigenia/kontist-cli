@@ -14,7 +14,7 @@
       "mocha"
     ],
     "moduleResolution": "node",
-    "outDir": "dist",
+    "outDir": "dist"
   },
   "include": ["source"],
   "exclude": ["node_modules"]
