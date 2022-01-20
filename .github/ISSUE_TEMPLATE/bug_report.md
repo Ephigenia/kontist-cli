@@ -1,10 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+title: 'bug: description'
+labels: 'bug'
+assignees: 'Ephigenia'
 ---
 
 **Is your feature request related to a problem? Please describe.**
