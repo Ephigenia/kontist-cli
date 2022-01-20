@@ -55,7 +55,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [ ] unblock `kontist-cli cards unblock <id>` (`changeCardStatus`)
     - [ ] replace `kontist-cli cards replace <id>` (`replaceCard`)
     - [ ] reorder `kontist-cli cards reorder <id>` (`reorderCard`)
-    - [ ] update card settings / limits
+    - [ ] update card settings / limitssfasfsadf
 - [ ] invoice
     - [ ] list
     - [ ] update invoice
