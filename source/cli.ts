@@ -8,7 +8,7 @@ program
   .description('lorem ipsum')
   .command('balance', 'currently available balance', {
     executableFile: 'cli-balance',
-  })
+  }).alias('show')
   .command('login', 'configuration of login & authorization', {
     executableFile: 'cli-login',
   })
@@ -16,7 +16,7 @@ program
   .command('transactions', 'list transactions', {
     executableFile: 'cli-transactions',
     isDefault: true,
-  })
+  }).alias('list')
   .command('transfer', 'money transfer, timed, standing', {
     executableFile: 'cli-transfer',
   })

@@ -11,9 +11,7 @@ const program = new Command();
 program
   .description(`list transaction`)
   // TODO add capability of using TransactionFilter properties
-  // TODO add option to client side reverse the ordering
   .argument('[query]', 'optional string to search in the transactions')
-  // TODO improve the description every time a feature is added
   // TODO add pagination
   .option('--limit <limit>', 'number of transactions to show, (0-50)', parseInt)
   .addHelpText(
@@ -25,6 +23,9 @@ Examples:
 
   Limit the number of transactions
     ${BIN_NAME} transactions --limit 5
+
+  Use JSTBL for selective display as table
+    ${BIN_NAME} transactions | jstbl show:valutaDateF,amountF,name,purpose
 
   Transform JSON to tabular output using jq and table-printer-cli
     ${BIN_NAME} transactions | jq -c 'map({valutaDateF,amountF,name,purpose})' | ctp -s
