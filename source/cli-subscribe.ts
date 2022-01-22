@@ -2,30 +2,40 @@
 import { Command } from 'commander';
 import { Transaction } from 'kontist/dist/lib/graphql/schema';
 
-import { createDefaultClient } from './lib/client';
-import config from './lib/config';
+import { createDefaultClient } from './lib/client.js';
+import config from './lib/config.js';
+import { BIN_NAME } from './lib/constants.js';
+import { formatTransaction } from './lib/format.js';
 
+// TODO filter for specific transactions, amount, incoming, outgoing?
 const program = new Command();
-program.description(`TODO`).action(run).parseAsync();
+program
+  .description(
+    `Subscribe to new transactions and output each new transaction in JSON ` +
+      `for further processing. Press CTRL+C to stop the process.`,
+  )
+  .addHelpText(
+    'after',
+    `
+Examples:
+  Show each incoming transaction:
+    ${BIN_NAME} watch
+
+  Selective display of fields
+    ${BIN_NAME} watch | jq -c  '[{bookingDateF,amountF,name,personalNote}]'
+  `,
+  )
+  .action(run)
+  .parseAsync();
 
 const onNext = (transaction: Transaction) => {
-  console.log(new Date(), 'transaction', transaction);
-  return true;
+  process.stdout.write(
+    JSON.stringify(formatTransaction(config, transaction)) + '\r\n',
+  );
 };
-
-const onError = (error: Error) => {
-  console.log(new Date(), 'error', error);
-};
+const onError = (error: Error) => console.error(error);
 
 async function run() {
   const client = await createDefaultClient(config);
-  console.log('starting to listen for new transaction(s)');
-
-  const start = Date.now();
-  setInterval(() => {
-    const elapsedMs = Date.now() - start;
-    console.log('%s %s', new Date(), (elapsedMs / 60_000).toPrecision(2));
-  }, 10_000);
-
   await client.models.transaction.subscribe(onNext, onError);
 }

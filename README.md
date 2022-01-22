@@ -8,7 +8,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [x] get current balance
     - [ ] different output when availableBalance doesn’t match balance
     - [ ] add notification when card fraud is on
-- [ ] option to permanently set different LC_ALL
+- [x] option to permanently set different LC_ALL
 - [ ] status command returns current overall status
 - [ ] add multiple output formats
     - [ ] `--pretty` as table
@@ -47,15 +47,15 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
         kontist-cli transfer create --account accountName <iban> <recipient> <amount>
         ```
 - [ ] cards
-    - [ ] list `kontist-cli cards list`
+    - [x] list `kontist-cli cards list`
         - [ ] including card settings
         - [ ] including card limits
-    - [ ] get specific card `kontist-cli cards <id>`
-    - [ ] block `kontist-cli cards block <id>` (`changeCardStatus`)
-    - [ ] unblock `kontist-cli cards unblock <id>` (`changeCardStatus`)
+    - [x] get specific card `kontist-cli cards <id>`
+    - [x] block `kontist-cli cards block <id>` (`changeCardStatus`)
+    - [x] unblock `kontist-cli cards unblock <id>` (`changeCardStatus`)
     - [ ] replace `kontist-cli cards replace <id>` (`replaceCard`)
     - [ ] reorder `kontist-cli cards reorder <id>` (`reorderCard`)
-    - [ ] update card settings / limitssfasfsadf
+    - [ ] update card settings / limits
 - [ ] invoice
     - [ ] list
     - [ ] update invoice
@@ -98,7 +98,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
             kontist-cli transfer create <iban> <recipient> <amount> --executeAt <executionDate>
             ```
         - [x] confirmation mfa
-        - [ ] timed order
+        - [x] timed order
             ```
             kontist-cli transfer create <iban> <recipient> <amount> \
                 --executeAt <executionDate>
@@ -110,10 +110,10 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
                 --lastExecutionTime <optionalDate> \
                 --reoccurence <reoccurenceType>;
             ```
-    - [ ] updateate
+    - [ ] update
         - [ ] [update standing order](https://kontist.dev/sdk/#updating-a-standing-order)
         - [ ] [categorize transaction](https://kontist.dev/sdk/#categorize-a-transaction) ([TransactionCategory](https://kontist.dev/docs/#transactioncategory))
-    - [ ] listen for new transactions (https://kontist.dev/sdk/#subscribe-to-new-transactions)
+    - [x] listen for new transactions (https://kontist.dev/sdk/#subscribe-to-new-transactions)
 - [ ] cli auto-completion
 - [ ] maintenance tasks
     - [ ] publish on NPM

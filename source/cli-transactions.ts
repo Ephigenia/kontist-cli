@@ -6,6 +6,7 @@ import { createDefaultClient } from './lib/client';
 import { formatTransaction } from './lib/format';
 import config from './lib/config';
 import { parseInt } from './lib/option-parser';
+import { OutputFormat, printF } from './lib/output';
 
 const program = new Command();
 program
@@ -60,5 +61,5 @@ async function run(query?: string) {
   }
 
   const items = transactionList.items.map((t) => formatTransaction(config, t));
-  console.log(JSON.stringify(items));
+  printF(OutputFormat.JSON, items);
 }

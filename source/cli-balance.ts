@@ -5,6 +5,7 @@ import { BIN_NAME } from './lib/constants';
 import { createDefaultClient } from './lib/client';
 import { formatCurrency } from './lib/format';
 import config from './lib/config';
+import { OutputFormat, print, printF } from './lib/output';
 
 const program = new Command();
 program
@@ -40,11 +41,13 @@ async function run() {
   const { availableBalance } = accountInfo;
 
   if (options.plain) {
-    console.log(availableBalance);
+    print(availableBalance);
     process.exit(0);
   }
 
-  console.log(
+  return printF(
+    OutputFormat.TEXT,
+    '%s\n',
     formatCurrency(
       availableBalance,
       config.get('locale') as string,

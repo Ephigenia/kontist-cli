@@ -6,6 +6,7 @@ import * as fs from 'node:fs/promises';
 
 import config from './lib/config';
 import { BIN_NAME } from './lib/constants';
+import { print, printF } from './lib/output';
 
 const program = new Command();
 program
@@ -70,12 +71,12 @@ async function run(clientId: string, username: string) {
   const tokenData = await client.auth.tokenManager.fetchTokenFromCredentials(
     parameters,
   );
-  console.log('Your unconfirmed access token is: %s', tokenData.accessToken);
-  console.log('starting MFA ... verfiy the login with your mobile device');
+  print('Your unconfirmed access token is: %s\n', tokenData.accessToken);
+  print('starting MFA ... verfiy the login with your mobile device\n');
 
   const confirmed = await client.auth.push.getConfirmedToken();
   // TODO update configuration when valid
-  console.log('Your confirmed access token is:', confirmed.accessToken);
+  print('Your confirmed access token is:\n', confirmed.accessToken);
 
   config.set({
     accessToken: confirmed.accessToken,
@@ -84,5 +85,5 @@ async function run(clientId: string, username: string) {
     refreshToken: confirmed.refreshToken,
   });
 
-  console.log('successfully updated the configuration');
+  print('successfully updated the configuration\n');
 }
