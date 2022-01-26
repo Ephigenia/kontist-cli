@@ -20,6 +20,7 @@ export function formatDateTime(
   locale: string,
   options?: object,
 ) {
+  if (!value) return '';
   return new Date(value).toLocaleString(locale, options);
 }
 

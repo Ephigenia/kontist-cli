@@ -13,7 +13,7 @@ export function print(...args: unknown[]) {
 export function printF(format: OutputFormatString, ...args: unknown[]) {
   switch (format) {
     case OutputFormat.JSON:
-      print(JSON.stringify([...args]));
+      print(JSON.stringify(args[0]));
       break;
     case OutputFormat.TEXT:
       print(...args);
