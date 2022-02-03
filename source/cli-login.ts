@@ -11,7 +11,7 @@ import { print, printF } from './lib/output';
 const program = new Command();
 program
   .argument('<clientId>', 'kontist oauth client id')
-  .argument(' <username>', 'TODO')
+  .argument('<username>', 'username, usually the email address')
   .option(
     '-p, --password <password>',
     'acccount password, better: consider tty in password, see examples',
