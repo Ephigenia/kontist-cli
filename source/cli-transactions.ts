@@ -9,7 +9,11 @@ import { parseInt } from './lib/option-parser';
 import { OutputFormat, printF } from './lib/output';
 
 const program = new Command();
+
+program.command('update', 'update a transaction', { executableFile: 'cli-stransaction-update'});
+
 program
+  .command('list', { isDefault: true })
   .description(`list transaction`)
   // TODO add capability of using TransactionFilter properties
   .argument('[query]', 'optional string to search in the transactions')

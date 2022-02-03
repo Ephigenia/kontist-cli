@@ -8,7 +8,7 @@ import config from './lib/config.js';
 import { OutputFormat, printF } from './lib/output.js';
 
 const program = new Command();
-program.command('list', 'list all cards', { executableFile: 'cli-cards-list' });
+program.command('list', 'list all cards', { executableFile: 'cli-cards-list', isDefault: true });
 
 program
   .command('pin')

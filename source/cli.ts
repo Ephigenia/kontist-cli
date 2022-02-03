@@ -20,7 +20,7 @@ program
     executableFile: 'cli-subscribe',
   })
   .alias('watch')
-  .command('transactions', 'list transactions', {
+  .command('transactions', 'list & modify transactions', {
     executableFile: 'cli-transactions',
     isDefault: true,
   })
