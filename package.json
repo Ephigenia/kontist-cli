@@ -65,7 +65,7 @@
   "dependencies": {
     "commander": "9.0.0",
     "conf": "10.1.1",
-    "kontist": "0.36.13",
+    "kontist": "0.37.0",
     "readline-sync": "1.4.10"
   },
   "devDependencies": {
