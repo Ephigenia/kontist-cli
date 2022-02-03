@@ -10,7 +10,9 @@ import { OutputFormat, print, printF } from './lib/output';
 
 const program = new Command();
 
-program.command('list', 'list transfers', { executableFile: 'cli-transfer-list' });
+program.command('list', 'list transfers', {
+  executableFile: 'cli-transfer-list',
+});
 
 program
   .argument('<iban>', 'IBAN')
