@@ -48,7 +48,6 @@ async function run(query?: string) {
   const options = program.opts();
 
   const client = await createDefaultClient(config);
-
   let transactionList;
   if (query) {
     transactionList = await client.models.transaction.search(query);

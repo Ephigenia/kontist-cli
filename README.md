@@ -65,32 +65,11 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [ ] delete invoice
 - [x] money format?
 - [x] currency?
-- [ ] transactions
-    - [x] list
-        - [x] limit transactions
-        - [x] search transactions
-        - [ ] paginate transactions
-        - [ ] filter transactions
-            - [ ] short filter for incoming / outgoing
-                ```
-                kontist-cli transfer list --outgoing
-                kontist-cli transfer list --incoming
-                ```
-            - [ ] by date-range 
-                ```
-                kontist-cli transfer list --from 2021-01-01 --to 2021-02-32
-                ```
-            - [ ] by date-range names
-                ```
-                kontist-cli transfer list this-month;
-                kontist-cli transfer list last-month;
-                kontist-cli transfer list this-year;
-                kontist-cli transfer list today;
-                kontist-cli transfer list yesterday;
-                ```
-    - [ ] cancel
+- [ ] transfers
+    - [ ] list
+    - [ ] cancel (mutation `cancelTransfer` & `confirmCancelTransfer`)
         ```
-        kontist-cli transfer create <iban> <recipient> <amount>
+        kontist-cli transfer cancel <id>
         ```
     - [ ] create
         - [x] normal order
@@ -113,6 +92,29 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
     - [ ] update
         - [ ] [update standing order](https://kontist.dev/sdk/#updating-a-standing-order)
         - [ ] [categorize transaction](https://kontist.dev/sdk/#categorize-a-transaction) ([TransactionCategory](https://kontist.dev/docs/#transactioncategory))
+- [ ] transactions
+    - [x] list
+        - [x] limit transactions
+        - [x] search transactions
+        - [ ] paginate transactions
+        - [ ] filter transactions
+            - [ ] short filter for incoming / outgoing
+                ```
+                kontist-cli transactions list --outgoing
+                kontist-cli transactions list --incoming
+                ```
+            - [ ] by date-range 
+                ```
+                kontist-cli transactions list --from 2021-01-01 --to 2021-02-32
+                ```
+            - [ ] by date-range names
+                ```
+                kontist-cli transactions list this-month;
+                kontist-cli transactions list last-month;
+                kontist-cli transactions list this-year;
+                kontist-cli transactions list today;
+                kontist-cli transactions list yesterday;
+                ```
     - [x] listen for new transactions (https://kontist.dev/sdk/#subscribe-to-new-transactions)
 - [ ] cli auto-completion
 - [ ] maintenance tasks
