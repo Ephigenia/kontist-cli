@@ -5,18 +5,19 @@ import * as readlineSync from 'readline-sync';
 
 import { createDefaultClient } from './lib/client';
 import config from './lib/config';
-import { parseDateAndTime } from './lib/option-parser';
 import { OutputFormat, print, printF } from './lib/output';
+import options from './lib/options';
+import args from './lib/arguments';
 
 const program = new Command();
 program
-  .argument('<iban>', 'IBAN')
+  .addArgument(args.iban)
   .argument('<recipient>', 'recipient name')
   .argument('<amount>', 'amount in cents (f.e. 2134 are 21.34)')
   .argument('<purpose>', 'recipient IBAN')
   .argument('<e2eId>', 'end to end id, reference')
-  .option('--executeAt <date-time>', 'TODO', parseDateAndTime)
-  .option('--dry-run', 'don’t do anything, print infos only')
+  .addOption(options.executeAt)
+  .addOption(options.dryRun)
   .action(run)
   .parseAsync();
 
