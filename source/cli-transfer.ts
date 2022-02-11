@@ -13,7 +13,7 @@ const program = new Command();
 program
   .addArgument(args.iban)
   .argument('<recipient>', 'recipient name')
-  .argument('<amount>', 'amount in cents (f.e. 2134 are 21.34)')
+  .addArgument(args.amount)
   .argument('<purpose>', 'recipient IBAN')
   .argument('<e2eId>', 'end to end id, reference')
   .addOption(options.executeAt)
@@ -24,7 +24,7 @@ program
 async function run(
   iban: string,
   recipient: string,
-  amount: string,
+  amount: number,
   purpose: string,
   endToEndId: string,
 ) {
@@ -35,7 +35,7 @@ async function run(
   // TODO add double-confirmation for all budgets above a specific limit (20?)
 
   const parameters: CreateTransferInput = {
-    amount: parseFloat(amount),
+    amount,
     e2eId: endToEndId,
     iban,
     purpose,

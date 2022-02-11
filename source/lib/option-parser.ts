@@ -10,3 +10,14 @@ export function parseDateAndTime(value: string) {
   }
   return new Date(timestamp);
 }
+
+export function parseIban(str: string) {
+  return str;
+}
+
+export function parseAmount(str: string) {
+  if (!/^\d+$/.test(str)) {
+    throw new InvalidArgumentError('unable to parse date');
+  }
+  return +str;
+}
