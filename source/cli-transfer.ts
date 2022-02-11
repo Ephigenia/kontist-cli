@@ -43,12 +43,12 @@ async function run(
     ...(options.executeAt && { executeAt: options.executeAt }),
   };
 
-  print('Please confirm that you want to make the following transfer\n');
-
   if (options.dryRun) {
+    print(parameters);
     process.exit(0);
   }
 
+  print('Please confirm that you want to make the following transfer\n');
   // TODO research common option display, uppercase for default, but which order
   const confirmation = readlineSync.question('Do you confirm N/y ');
   if (!['y', 'Y'].includes(confirmation)) {
