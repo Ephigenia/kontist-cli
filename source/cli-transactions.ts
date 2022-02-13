@@ -5,16 +5,17 @@ import { BIN_NAME } from './lib/constants';
 import { createDefaultClient } from './lib/client';
 import { formatTransaction } from './lib/format';
 import config from './lib/config';
-import { parseInt } from './lib/option-parser';
 import { OutputFormat, printF } from './lib/output';
+import options from './lib/options';
+import args from './lib/arguments';
 
 const program = new Command();
 program
   .description(`list transaction`)
   // TODO add capability of using TransactionFilter properties
-  .argument('[query]', 'optional string to search in the transactions')
+  .addArgument(args.query)
   // TODO add pagination
-  .option('--limit <limit>', 'number of transactions to show, (0-50)', parseInt)
+  .addOption(options.limit)
   .addHelpText(
     'after',
     `

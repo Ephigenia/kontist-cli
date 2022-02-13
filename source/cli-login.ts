@@ -6,20 +6,16 @@ import * as fs from 'node:fs/promises';
 
 import config from './lib/config';
 import { BIN_NAME } from './lib/constants';
-import { print, printF } from './lib/output';
+import { print } from './lib/output';
+import args from './lib/arguments';
+import options from './lib/options';
 
 const program = new Command();
 program
-  .argument('<clientId>', 'kontist oauth client id')
-  .argument('<username>', 'username, usually the email address')
-  .option(
-    '-p, --password <password>',
-    'acccount password, better: consider tty in password, see examples',
-  )
-  .option(
-    '-s, --secret <clientSecret>',
-    'optional oauth client secret to be used',
-  )
+  .addArgument(args.clientId)
+  .addArgument(args.username)
+  .addOption(options.password)
+  .addOption(options.secret)
   // TODO add optional option to set scopes (which may be not correct)
   .addHelpText(
     'after',

@@ -5,8 +5,9 @@ import * as readlineSync from 'readline-sync';
 
 import { createDefaultClient } from './lib/client';
 import config from './lib/config';
-import { parseDateAndTime } from './lib/option-parser';
 import { OutputFormat, print, printF } from './lib/output';
+import options from './lib/options';
+import args from './lib/arguments';
 
 const program = new Command();
 
@@ -15,22 +16,24 @@ program.command('list', 'list transfers', {
 });
 
 program
-  .argument('<iban>', 'IBAN')
-  .argument('<recipient>', 'recipient name')
-  .argument('<amount>', 'amount in cents (f.e. 2134 are 21.34)')
-  .argument('<purpose>', 'recipient IBAN')
-  .argument('<e2eId>', 'end to end id, reference')
-  .option('--executeAt <date-time>', 'TODO', parseDateAndTime)
-  // .option('--dry-run', 'don’t do anything, print infos only')
+  .addArgument(args.iban)
+  .addArgument(args.recipient)
+  .addArgument(args.amount)
+  .addArgument(args.purpose)
+  .addArgument(args.e2eId)
+  .addOption(options.executeAt)
+  .addOption(options.dryRun)
+  .addOption(options.personalNote)
+  // TODO add category
   .action(run)
   .parseAsync();
 
 async function run(
   iban: string,
   recipient: string,
-  amount: string,
-  purpose: string,
-  endToEndId: string,
+  amount: number,
+  purpose?: string,
+  e2eId?: string,
 ) {
   const options = program.opts();
   // TODO validate amount
@@ -39,15 +42,17 @@ async function run(
   // TODO add double-confirmation for all budgets above a specific limit (20?)
 
   const parameters: CreateTransferInput = {
-    amount: parseFloat(amount),
-    e2eId: endToEndId,
+    amount,
+    e2eId,
     iban,
     purpose,
     recipient,
+    ...(options.personalNote && { personalNote: options.personalNote }),
     ...(options.executeAt && { executeAt: options.executeAt }),
   };
 
   if (options.dryRun) {
+    print(parameters);
     process.exit(0);
   }
 
