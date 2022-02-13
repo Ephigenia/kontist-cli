@@ -8,7 +8,13 @@ export default {
   ).argParser(parseAmount),
   cardId: new Argument('<cardId>', 'card identification id'),
   clientId: new Argument('<clientId>', 'Kontist OAuth client id'),
-  e2eId: new Argument('[e2eId]', 'end-to-end id/reference string'),
+  e2eId: new Argument('[e2eId]', 'end-to-end id/reference string').argParser(
+    (val: string): string => {
+      if (val.length > 35)
+        throw new InvalidOptionArgumentError('To long e2eid');
+      return val;
+    },
+  ),
   iban: new Argument(
     '<iban>',
     'International Bank Account Number (IBAN)',
