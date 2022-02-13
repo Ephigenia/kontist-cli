@@ -14,14 +14,18 @@ export function parseDateAndTime(value: string): Date {
 export function parseIban(str: unknown): string {
   const iban = String(str);
   if (!/^[A-Z]{2}[0-9]{2}\d+$/.test(iban)) {
-    throw new InvalidArgumentError('The given IBAN doesn’t have a valid format.');
+    throw new InvalidArgumentError(
+      'The given IBAN doesn’t have a valid format.',
+    );
   }
   return iban;
 }
 
 export function parseAmount(str: unknown): number {
   if (!/^\d+$/.test(String(str))) {
-    throw new InvalidArgumentError('The given amount is not valid. Please enter the amount in cents.');
+    throw new InvalidArgumentError(
+      'The given amount is not valid. Please enter the amount in cents.',
+    );
   }
   return +(str as string);
 }

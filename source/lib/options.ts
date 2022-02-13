@@ -18,9 +18,7 @@ export default {
     '-n, --note <personalNote>',
     'personal note next to the purpose',
   ),
-  plain: new Option(
-    '--plain', 'print out in plain text format'
-  ),
+  plain: new Option('--plain', 'print out in plain text format'),
   secret: new Option(
     '-s, --secret <clientSecret>',
     'optional oauth client secret to be used',
