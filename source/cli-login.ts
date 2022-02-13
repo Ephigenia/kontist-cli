@@ -6,7 +6,7 @@ import * as fs from 'node:fs/promises';
 
 import config from './lib/config';
 import { BIN_NAME } from './lib/constants';
-import { print, printF } from './lib/output';
+import { print } from './lib/output';
 import args from './lib/arguments';
 import options from './lib/options';
 

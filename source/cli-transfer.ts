@@ -12,12 +12,14 @@ import args from './lib/arguments';
 const program = new Command();
 program
   .addArgument(args.iban)
-  .argument('<recipient>', 'recipient name')
+  .addArgument(args.recipient)
   .addArgument(args.amount)
-  .argument('<purpose>', 'recipient IBAN')
-  .argument('<e2eId>', 'end to end id, reference')
+  .addArgument(args.purpose)
+  .addArgument(args.e2eId)
   .addOption(options.executeAt)
   .addOption(options.dryRun)
+  .addOption(options.personalNote)
+  // TODO add category
   .action(run)
   .parseAsync();
 
@@ -25,8 +27,8 @@ async function run(
   iban: string,
   recipient: string,
   amount: number,
-  purpose: string,
-  endToEndId: string,
+  purpose?: string,
+  e2eId?: string,
 ) {
   const options = program.opts();
   // TODO validate amount
@@ -36,10 +38,11 @@ async function run(
 
   const parameters: CreateTransferInput = {
     amount,
-    e2eId: endToEndId,
+    e2eId,
     iban,
     purpose,
     recipient,
+    ...(options.personalNote && { personalNote: options.personalNote }),
     ...(options.executeAt && { executeAt: options.executeAt }),
   };
 

@@ -14,7 +14,7 @@ program.command('list', 'list all cards', { executableFile: 'cli-cards-list' });
 program
   .command('pin')
   .addArgument(args.cardId)
-  .arguments('<pin>')
+  .addArgument(args.pin)
   .action(async (cardId, pin) => {
     const client = await createDefaultClient(config);
     const confirmationId = await client.models.card.changePIN({

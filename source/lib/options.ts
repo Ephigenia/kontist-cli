@@ -14,6 +14,13 @@ export default {
     '-p, --password <password>',
     'acccount password, better: consider tty in password, see examples',
   ),
+  personalNote: new Option(
+    '-n, --note <personalNote>',
+    'personal note next to the purpose',
+  ),
+  plain: new Option(
+    '--plain', 'print out in plain text format'
+  ),
   secret: new Option(
     '-s, --secret <clientSecret>',
     'optional oauth client secret to be used',

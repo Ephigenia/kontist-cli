@@ -2,19 +2,15 @@ import { expect } from 'chai';
 import { InvalidOptionArgumentError } from 'commander';
 import * as lib from './option-parser';
 
-
 describe('parseIban', function () {
-  const valid = [
-    'DE86701500000094203609',
-    'DE867015000000942',
-  ];
-  valid.forEach(iban => {
-    it(`valid ${iban}`, function() {
+  const valid = ['DE86701500000094203609', 'DE867015000000942'];
+  valid.forEach((iban) => {
+    it(`valid ${iban}`, function () {
       expect(lib.parseIban(iban)).to.be.a('String');
     });
   });
 
-  describe('invalid', function() {
+  describe('invalid', function () {
     [
       1,
       '1',
@@ -24,9 +20,7 @@ describe('parseIban', function () {
       ' DE86701500000094203609',
     ].forEach((input) => {
       it(`${JSON.stringify(input)}`, function () {
-        expect(() => lib.parseIban(input)).to.throw(
-          InvalidOptionArgumentError,
-        );
+        expect(() => lib.parseIban(input)).to.throw(InvalidOptionArgumentError);
       });
     });
   });
@@ -64,7 +58,7 @@ describe('parseDateAndTime', function () {
       );
     });
   });
-}); // suite
+}); // parseDateAndTime
 
 describe('parseAmount', function () {
   const valid = [
@@ -82,9 +76,7 @@ describe('parseAmount', function () {
   const invalid = ['-1', false, {}, ' 1', ' 1 ', '1 ', '2.1', '2.', '2.3'];
   invalid.forEach((value) => {
     it(`doesn’t accept ${JSON.stringify(value)}`, function () {
-      expect(() => lib.parseAmount(value)).to.throw(
-        InvalidOptionArgumentError,
-      );
+      expect(() => lib.parseAmount(value)).to.throw(InvalidOptionArgumentError);
     });
   });
-});
+}); // parseAmount

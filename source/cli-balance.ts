@@ -6,6 +6,7 @@ import { createDefaultClient } from './lib/client';
 import { formatCurrency } from './lib/format';
 import config from './lib/config';
 import { OutputFormat, print, printF } from './lib/output';
+import options from './lib/options';
 
 const program = new Command();
 program
@@ -14,7 +15,7 @@ program
       'using the configured currency (defaults to "EUR") and the systems ' +
       'default locale when formatting the value.',
   )
-  .option('--plain', 'no formatting, just print the available balance in cents')
+  .addOption(options.plain)
   .addHelpText(
     'after',
     `
