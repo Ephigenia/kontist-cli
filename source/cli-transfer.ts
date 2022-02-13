@@ -8,6 +8,7 @@ import config from './lib/config';
 import { OutputFormat, print, printF } from './lib/output';
 import options from './lib/options';
 import args from './lib/arguments';
+import { BIN_NAME } from './lib/constants';
 
 const program = new Command();
 
@@ -21,10 +22,33 @@ program
   .addArgument(args.amount)
   .addArgument(args.purpose)
   .addArgument(args.e2eId)
-  .addOption(options.executeAt)
+  .addOption(options.at)
   .addOption(options.dryRun)
-  .addOption(options.personalNote)
+  .option(
+    '--last <date-time>',
+    'The date at which the last payment will be executed for Standing Orders',
+  )
+  .addOption(options.note)
+  .addOption(options.reoccurence)
   // TODO add category
+  .addHelpText(
+    'after',
+    `
+Examples:
+  Transfer 30 EUR to Hulk Hogan
+    ${BIN_NAME} transfer DE123456789102334 "Hulk Hogan" 3000 "Wrestling Outfit"
+
+  Create a timed order
+    ${BIN_NAME} transfer DE123456789102334 "Undertaker" 9200 "Training" --exececuteAt 2022-04-15
+
+  Create a re-occuring which happens every month until end of 2022
+    ${BIN_NAME} transfer DE123456789102334 "Hulk Hogan" 3000 "Wrestling Club Membership fee" \\
+      --note "created after entering the wrestling club" \\
+      --repeat MONTHLY \\
+      --at 2022-02-14 \\
+      --last 2022-12-31
+  `,
+  )
   .action(run)
   .parseAsync();
 
@@ -43,12 +67,14 @@ async function run(
 
   const parameters: CreateTransferInput = {
     amount,
-    e2eId,
+    ...(options.at && { executeAt: options.at }),
+    ...(e2eId && { e2eId }),
     iban,
+    ...(options.last && { last: options.last }),
+    ...(options.note && { personalNote: options.note }),
     purpose,
     recipient,
-    ...(options.personalNote && { personalNote: options.personalNote }),
-    ...(options.executeAt && { executeAt: options.executeAt }),
+    ...(options.repeat && { reoccurrence: options.repeat }),
   };
 
   if (options.dryRun) {

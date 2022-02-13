@@ -10,7 +10,7 @@ import {
 import { createDefaultClient } from './lib/client.js';
 import config from './lib/config.js';
 import { printF, OutputFormat } from './lib/output';
-import { options } from './lib/options';
+import options from './lib/options';
 
 const program = new Command();
 program

@@ -66,7 +66,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 - [x] money format?
 - [x] currency?
 - [ ] transfers
-    - [ ] list
+    - [x] list
     - [ ] cancel (mutation `cancelTransfer` & `confirmCancelTransfer`)
         ```
         kontist-cli transfer cancel <id>
@@ -98,12 +98,13 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
         - [x] search transactions
         - [ ] paginate transactions
         - [ ] filter transactions
-            - [ ] short filter for incoming / outgoing
+            - [x] by iban(s)
+            - [x] short filter for incoming / outgoing
                 ```
                 kontist-cli transactions list --outgoing
                 kontist-cli transactions list --incoming
                 ```
-            - [ ] by date-range 
+            - [x] by date-range 
                 ```
                 kontist-cli transactions list --from 2021-01-01 --to 2021-02-32
                 ```
@@ -117,6 +118,10 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
                 ```
     - [x] listen for new transactions (https://kontist.dev/sdk/#subscribe-to-new-transactions)
 - [ ] cli auto-completion
+- [ ] cli tui interface
+    - [ ] list transactions
+    - [ ] show details of transaction
+    - [ ] new transaction
 - [ ] maintenance tasks
     - [ ] publish on NPM
     - [x] use version from package.json

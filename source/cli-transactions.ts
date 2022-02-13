@@ -8,23 +8,36 @@ import config from './lib/config';
 import { OutputFormat, printF } from './lib/output';
 import options from './lib/options';
 import args from './lib/arguments';
+import {
+  AccountTransactionsArgs,
+  BaseOperator,
+  TransactionFilter,
+} from 'kontist/dist/lib/graphql/schema';
 
 const program = new Command();
 program
   .description(`list transaction`)
-  // TODO add capability of using TransactionFilter properties
   .addArgument(args.query)
   // TODO add pagination
+  .addOption(options.dryRun)
+  .addOption(options.from)
   .addOption(options.limit)
+  .addOption(options.to)
+  .addOption(options.iban)
+  .option('--outgoing', 'show only negative amounts')
+  .option('--incoming', 'show only positive amounts')
   .addHelpText(
     'after',
     `
 Examples:
-  Search for transactions
-    ${BIN_NAME} transactions -q "IKEA"
+  Search for transactions, like invoce numbers
+    ${BIN_NAME} transactions -q "RN-2022-1"
 
   Limit the number of transactions
     ${BIN_NAME} transactions --limit 5
+
+  In specific time frame
+  ${BIN_NAME} transactions --from 2022-02-01 --to 2022-02-28
 
   Use JSTBL for selective display as table
     ${BIN_NAME} transactions | jstbl show:valutaDateF,amountF,name,purpose
@@ -49,16 +62,33 @@ async function run(query?: string) {
   const options = program.opts();
 
   const client = await createDefaultClient(config);
-  let transactionList;
+
+  // use options and arguments to bild the query arguments
+  const transactionFilter: TransactionFilter = {};
+  if (options.from) transactionFilter.bookingDate_gte = options.from;
+  if (options.to) transactionFilter.bookingDate_lte = options.to;
+  if (options.incoming) transactionFilter.amount_gt = 0;
+  if (options.outgoing) transactionFilter.amount_lt = 0;
+  if (options.iban) transactionFilter.iban_in = options.iban;
   if (query) {
-    transactionList = await client.models.transaction.search(query);
-  } else {
-    // TODO catch graphql error when limit is not in range between 0 and 50
-    const queryArguments = {
-      ...(typeof options.limit === 'number' && { first: options.limit }),
-    };
-    transactionList = await client.models.transaction.fetch(queryArguments);
+    transactionFilter.conditions = [
+      { iban_like: query, operator: BaseOperator.Or },
+      { name_like: query, operator: BaseOperator.Or },
+      { purpose_like: query, operator: BaseOperator.Or },
+    ];
   }
+
+  // TODO catch graphql error when limit is not in range between 0 and 50
+  const queryArguments: AccountTransactionsArgs = {
+    ...(typeof options.limit === 'number' && { first: options.limit }),
+    filter: transactionFilter,
+  };
+  if (options.dryRun) {
+    console.log(queryArguments);
+    process.exit(0);
+  }
+
+  const transactionList = await client.models.transaction.fetch(queryArguments);
 
   const items = transactionList.items.map((t) => formatTransaction(config, t));
   printF(OutputFormat.JSON, items);
