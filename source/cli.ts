@@ -16,6 +16,10 @@ program
   .command('login', 'configuration of login & authorization', {
     executableFile: 'cli-login',
   })
+  .command('account', 'get account information', {
+    executableFile: 'cli-account',
+  })
+  .alias('status')
   .command('subscribe', 'subscribe for new transactions', {
     executableFile: 'cli-subscribe',
   })

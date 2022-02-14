@@ -92,6 +92,7 @@ async function run(
   }
 
   const client = await createDefaultClient(config);
+
   const confirmationId = await client.models.transfer.createOne(parameters);
 
   // TODO add error handling when confirming the transfer

@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "allowJs": true,
-    "declaration": true,
+    "declaration": false,
     "target": "ES2015",
     "module": "commonjs",
     "esModuleInterop": true,
