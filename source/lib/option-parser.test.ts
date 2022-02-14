@@ -3,7 +3,7 @@ import { InvalidOptionArgumentError } from 'commander';
 import * as lib from './option-parser';
 
 describe('parseIban', function () {
-  const valid = ['DE86701500000094203609', 'DE867015000000942'];
+  const valid = ['GB94BARC10201530093459', 'GB33BUKB20201555555555'];
   valid.forEach((iban) => {
     it(`valid ${iban}`, function () {
       expect(lib.parseIban(iban)).to.be.a('String');
@@ -18,6 +18,16 @@ describe('parseIban', function () {
       'DE',
       'DE86 7015 0000 0094 2036 09',
       ' DE86701500000094203609',
+      // invalid checks due to invalid bank codes, checksums etc.
+      // taken from https://www.iban.com/testibans
+      'GB94BARC20201530093459',
+      'GB96BARC202015300934591',
+      'GB12BARC20201530093A59',
+      'GB78BARCO0201530093459',
+      'GB2LABBY09012857201707',
+      'GB01BARC20714583608387',
+      'GB00HLFX11016111455365',
+      'US64SVBKUS6S3300958879',
     ].forEach((input) => {
       it(`${JSON.stringify(input)}`, function () {
         expect(() => lib.parseIban(input)).to.throw(InvalidOptionArgumentError);

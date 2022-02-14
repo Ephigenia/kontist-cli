@@ -1,3 +1,4 @@
+import { validateIBAN } from 'ibantools';
 import { InvalidArgumentError } from 'commander';
 
 export function parseDateAndTime(value: string): Date {
@@ -18,9 +19,12 @@ export function parseIban(str: unknown): string {
 }
 
 export function assertValidIban(iban: string): void {
-  if (!/^[A-Z]{2}[0-9]{2}\d+$/.test(iban)) {
+  const result = validateIBAN(iban);
+  if (!result.valid) {
     throw new InvalidArgumentError(
-      `The given IBAN ${iban} doesn’t have a valid format.`,
+      `The given IBAN ${JSON.stringify(
+        iban,
+      )} is not valid, error codes: ${result.errorCodes.join(', ')}`,
     );
   }
   return;
