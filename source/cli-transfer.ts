@@ -17,9 +17,9 @@ program.command('list', 'list transfers', {
 });
 
 program
+  .addArgument(args.amount)
   .addArgument(args.iban)
   .addArgument(args.recipient)
-  .addArgument(args.amount)
   .addArgument(args.purpose)
   .addArgument(args.e2eId)
   .addOption(options.at)
@@ -36,13 +36,13 @@ program
     `
 Examples:
   Transfer 30 EUR to Hulk Hogan
-    ${BIN_NAME} transfer DE123456789102334 "Hulk Hogan" 3000 "Wrestling Outfit"
+    ${BIN_NAME} transfer 3000 DE123456789102334 "Hulk Hogan" "Wrestling Outfit"
 
   Create a timed order
-    ${BIN_NAME} transfer DE123456789102334 "Undertaker" 9200 "Training" --exececuteAt 2022-04-15
+    ${BIN_NAME} transfer 9200 DE123456789102334 "Undertaker" "Training" --at 2022-04-15
 
   Create a re-occuring which happens every month until end of 2022
-    ${BIN_NAME} transfer DE123456789102334 "Hulk Hogan" 3000 "Wrestling Club Membership fee" \\
+    ${BIN_NAME} transfer 3000 DE123456789102334 "Hulk Hogan" "Wrestling Club Membership fee" \\
       --note "created after entering the wrestling club" \\
       --repeat MONTHLY \\
       --at 2022-02-14 \\
@@ -82,10 +82,11 @@ async function run(
     process.exit(0);
   }
 
-  print('Please confirm that you want to make the following transfer\n');
+  print('Please confirm that you want to make the following transfer:\n');
+  print(parameters);
   // TODO research common option display, uppercase for default, but which order
   // TODO add option to disable confirmation
-  const confirmation = readlineSync.question('Do you confirm N/y ');
+  const confirmation = readlineSync.question('\nDo you confirm N/y ');
   if (!['y', 'Y'].includes(confirmation)) {
     print('no confirmation given, stopping here, no transaction was made\n');
     process.exit(0);

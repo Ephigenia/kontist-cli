@@ -26,6 +26,12 @@ describe('parseIban', function () {
   });
 }); // parseIban
 
+describe('assertValidSEPAChars', function () {
+  it('is valid', function () {
+    expect(lib.assertValidSEPAChars('Undertaker')).to.equal(true);
+  });
+});
+
 describe('parseDateAndTime', function () {
   const valid = [
     ['2022-01-01', '2022-01-01T00:00:00.000Z'],

@@ -13,12 +13,17 @@ export function parseDateAndTime(value: string): Date {
 
 export function parseIban(str: unknown): string {
   const iban = String(str);
+  assertValidIban(iban);
+  return iban;
+}
+
+export function assertValidIban(iban: string): void {
   if (!/^[A-Z]{2}[0-9]{2}\d+$/.test(iban)) {
     throw new InvalidArgumentError(
-      'The given IBAN doesn’t have a valid format.',
+      `The given IBAN ${iban} doesn’t have a valid format.`,
     );
   }
-  return iban;
+  return;
 }
 
 export function parseAmount(str: unknown): number {
@@ -28,4 +33,16 @@ export function parseAmount(str: unknown): number {
     );
   }
   return +(str as string);
+}
+
+export function assertValidSEPAChars(str: string): boolean {
+  // according to https://www.sepaforcorporates.com/sepa-implementation/valid-xml-characters-sepa-payments/
+  if (!/^[a-z0-9 /-\?:().,‘+]+$/i.test(String(str))) {
+    throw new InvalidArgumentError(
+      `The given string ${JSON.stringify(
+        str,
+      )} contains invalid non-SEPA standard character(s).`,
+    );
+  }
+  return true;
 }

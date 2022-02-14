@@ -1,35 +1,45 @@
 import { Argument, InvalidOptionArgumentError } from 'commander';
-import { parseAmount, parseIban } from './option-parser';
+import { assertValidSEPAChars, parseAmount, parseIban } from './option-parser';
 
 export default {
   amount: new Argument(
-    '<amount>',
+    'amount',
     'The amount of the transfer in cents (f.e. 2134 are 21.34)',
-  ).argParser(parseAmount),
+  )
+    .argRequired()
+    .argParser(parseAmount),
   cardId: new Argument('<cardId>', 'card identification id'),
   clientId: new Argument('<clientId>', 'Kontist OAuth client id'),
-  e2eId: new Argument('[e2eId]', 'end-to-end id/reference string').argParser(
-    (val: string): string => {
+  e2eId: new Argument('e2eId', 'end-to-end id/reference string')
+    .argOptional()
+    .argParser((val: string): string => {
       if (val.length > 35)
         throw new InvalidOptionArgumentError('To long e2eid');
+      assertValidSEPAChars(val);
       return val;
-    },
-  ),
-  iban: new Argument(
-    '<iban>',
-    'International Bank Account Number (IBAN)',
-  ).argParser(parseIban),
-  pin: new Argument('<pin>'),
+    }),
+  iban: new Argument('iban', 'International Bank Account Number (IBAN)')
+    .argRequired()
+    .argParser(parseIban),
+  pin: new Argument('pin').argRequired(),
   purpose: new Argument(
-    '[purpose]',
+    'purpose',
     'The purpose of the transfer - 140 max characters',
-  ).argParser((val: string): string => {
-    if (val.length > 140)
-      throw new InvalidOptionArgumentError('To long purpose');
-    return val;
-  }),
+  )
+    .argOptional()
+    .argParser((val: string): string => {
+      if (val.length > 140)
+        throw new InvalidOptionArgumentError('To long purpose');
+      assertValidSEPAChars(val);
+      return val;
+    }),
   query: new Argument('[query]', 'string to search in the transactions'),
-  recipient: new Argument('[recipient]', 'The name of the transfer recipient'),
+  recipient: new Argument('recipient', 'The name of the transfer recipient')
+    .argOptional()
+    .argParser((val: string): string => {
+      assertValidSEPAChars(val);
+      return val;
+    }),
   username: new Argument(
     '<username>',
     'kontist usernamer, usually an email address',
