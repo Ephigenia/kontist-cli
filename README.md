@@ -68,12 +68,18 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 - [x] money format?
 - [x] currency?
 - [ ] transfers
+    - [ ] make it easier to repeat transactions
+        - [ ] proposal: re-use transactions by id
+        - [ ] proposal: auto-completion for `kontist-cli transfer` arguments
+        - [ ] proposal: address-book like presets?
     - [x] list
     - [ ] cancel (mutation `cancelTransfer` & `confirmCancelTransfer`)
         ```
         kontist-cli transfer cancel <id>
         ```
     - [ ] create
+        - [ ] enable IBAN with spacing
+        - [ ] convert umlauts to eu, ß to ss
         - [x] normal order
             ```
             kontist-cli transfer create <iban> <recipient> <amount> --executeAt <executionDate>

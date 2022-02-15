@@ -1,4 +1,4 @@
-import { validateIBAN } from 'ibantools';
+import { validateIBAN, electronicFormatIBAN } from 'ibantools';
 import { InvalidArgumentError } from 'commander';
 
 export function parseDateAndTime(value: string): Date {
@@ -12,8 +12,13 @@ export function parseDateAndTime(value: string): Date {
   return new Date(timestamp);
 }
 
-export function parseIban(str: unknown): string {
-  const iban = String(str);
+export function parseIban(str: string): string {
+  const iban = electronicFormatIBAN(str);
+  if (!iban) {
+    throw new InvalidArgumentError(
+      `The given IBAN ${JSON.stringify(iban)} is not valid.`,
+    );
+  }
   assertValidIban(iban);
   return iban;
 }
@@ -41,7 +46,7 @@ export function parseAmount(str: unknown): number {
 
 export function assertValidSEPAChars(str: string): boolean {
   // according to https://www.sepaforcorporates.com/sepa-implementation/valid-xml-characters-sepa-payments/
-  if (!/^[a-z0-9 /-\?:().,‘+]+$/i.test(String(str))) {
+  if (!/^[a-z0-9 /\-\?:().,‘+]+$/i.test(String(str))) {
     throw new InvalidArgumentError(
       `The given string ${JSON.stringify(
         str,

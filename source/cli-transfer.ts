@@ -12,9 +12,9 @@ import { BIN_NAME } from './lib/constants';
 
 const program = new Command();
 
-program.command('list', 'list transfers', {
-  executableFile: 'cli-transfer-list',
-});
+// program.command('list', 'list transfers', {
+//   executableFile: 'cli-transfer-list',
+// });
 
 program
   .addArgument(args.amount)
@@ -54,8 +54,8 @@ Examples:
 
 async function run(
   iban: string,
-  recipient: string,
   amount: number,
+  recipient: string,
   purpose?: string,
   e2eId?: string,
 ) {

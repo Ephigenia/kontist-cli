@@ -3,7 +3,13 @@ import { InvalidOptionArgumentError } from 'commander';
 import * as lib from './option-parser';
 
 describe('parseIban', function () {
-  const valid = ['GB94BARC10201530093459', 'GB33BUKB20201555555555'];
+  const valid = [
+    'GB94BARC10201530093459',
+    'GB33BUKB20201555555555',
+    // with spacing
+    'GB33 BUKB 2020 1555 5555 55',
+    'GB33BU KB 2020 1555555555',
+  ];
   valid.forEach((iban) => {
     it(`valid ${iban}`, function () {
       expect(lib.parseIban(iban)).to.be.a('String');
@@ -30,7 +36,9 @@ describe('parseIban', function () {
       'US64SVBKUS6S3300958879',
     ].forEach((input) => {
       it(`${JSON.stringify(input)}`, function () {
-        expect(() => lib.parseIban(input)).to.throw(InvalidOptionArgumentError);
+        expect(() => lib.parseIban(input as string)).to.throw(
+          InvalidOptionArgumentError,
+        );
       });
     });
   });
@@ -38,9 +46,16 @@ describe('parseIban', function () {
 
 describe('assertValidSEPAChars', function () {
   it('is valid', function () {
-    expect(lib.assertValidSEPAChars('Undertaker')).to.equal(true);
+    expect(lib.assertValidSEPAChars('Something with RN 2342/212-391')).to.equal(
+      true,
+    );
   });
-});
+  it('is invalid', function () {
+    expect(() => lib.assertValidSEPAChars('ä')).to.throw(
+      InvalidOptionArgumentError,
+    );
+  });
+}); // assertValidSEPAChars
 
 describe('parseDateAndTime', function () {
   const valid = [
