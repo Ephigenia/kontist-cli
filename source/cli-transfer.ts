@@ -53,8 +53,8 @@ Examples:
   .parseAsync();
 
 async function run(
-  iban: string,
   amount: number,
+  iban: string,
   recipient: string,
   purpose?: string,
   e2eId?: string,
