@@ -2,6 +2,22 @@
 
 Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interface)) Tool for using the [Kontist](https://kontist.com/) API which under the hood relies on their marvelous [GraphQL API](https://kontist.dev/docs/#schema-reference) [Kontist Javascript SDK](https://kontist.dev/sdk/#using-the-sdk)
 
+- [Features](#features)
+- [Ideas](#ideas)
+- [Setup](#setup)
+- [Examples](#examples)
+- [Other Projects / Bookmarks](#other-projects--bookmarks)
+
+# Features
+
+- show status & current balance
+- list & filter transaction(s)
+- subscribe to incoming transactions
+- create transfer
+- list, show, block, unblock card(s)
+
+See list of "ideas" for upcoming features
+
 # Ideas 
 
 - [x] balance (`kontist-cli balance`, returns `availableBalance`)
@@ -164,7 +180,6 @@ Some other command rely on the systems `LC_ALL`, `LC_TIME`, or `LC_NUMERIC` vari
 - [N26 CLI (Python)](https://github.com/femueller/python-n26)
 - [Teller CLI](https://github.com/sebinsua/teller-cli)
 - [mbank cli](https://github.com/jwilk/mbank-cli)
-
 - [Kontist GraphQL Schema Reference](https://kontist.dev/docs/#updatetransferinput)
 - [Kontist DEV](https://kontist.dev)
 - [Kontist GraphQL Playground](https://kontist.dev/playground/)

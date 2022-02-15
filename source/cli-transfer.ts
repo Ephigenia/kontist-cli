@@ -12,9 +12,9 @@ import { BIN_NAME } from './lib/constants';
 
 const program = new Command();
 
-// program.command('list', 'list transfers', {
-//   executableFile: 'cli-transfer-list',
-// });
+program.command('list', 'list transfers', {
+  executableFile: 'cli-transfer-list',
+});
 
 program
   .addArgument(args.amount)
@@ -30,6 +30,7 @@ program
   )
   .addOption(options.note)
   .addOption(options.reoccurence)
+  .addOption(options.yes)
   // TODO add category
   .addHelpText(
     'after',
@@ -47,6 +48,9 @@ Examples:
       --repeat MONTHLY \\
       --at 2022-02-14 \\
       --last 2022-12-31
+
+  Create a transfer bypassing the confirmation
+    ${BIN_NAME} transfer --yes 9200 DE123456789102334 "Mr. Clever" "Math Tutoring"
   `,
   )
   .action(run)
@@ -78,18 +82,23 @@ async function run(
   };
 
   if (options.dryRun) {
+    // TODO display the amount formatted so that everybody can be sure
     print(parameters);
     process.exit(0);
   }
 
-  print('Please confirm that you want to make the following transfer:\n');
-  print(parameters);
-  // TODO research common option display, uppercase for default, but which order
-  // TODO add option to disable confirmation
-  const confirmation = readlineSync.question('\nDo you confirm N/y ');
-  if (!['y', 'Y'].includes(confirmation)) {
-    print('no confirmation given, stopping here, no transaction was made\n');
-    process.exit(0);
+  // TODO double confirm high amount(s)?
+
+  if (!options.yes) {
+    print('Please confirm that you want to make the following transfer:\n');
+    print(parameters);
+    // TODO research common option display, uppercase for default, but which order
+    // TODO add option to disable confirmation
+    const confirmation = readlineSync.question('\nDo you confirm N/y ');
+    if (!['y', 'Y'].includes(confirmation)) {
+      print('no confirmation given, stopping here, no transaction was made\n');
+      process.exit(0);
+    }
   }
 
   const client = await createDefaultClient(config);

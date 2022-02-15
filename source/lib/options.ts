@@ -45,4 +45,5 @@ export default {
     'include items ending at that date',
   ).argParser(parseDateAndTime),
   transferStatus: new Option('--status <status>', 'filter transfers by status'),
+  yes: new Option('-y, --yes', 'bypass confirmation/auto confirmation'),
 };
