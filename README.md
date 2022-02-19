@@ -26,8 +26,8 @@ See list of "ideas" for upcoming features
     - [ ] add notification when card fraud is on
 - [x] option to permanently set different LC_ALL
 - [x] status command returns current overall status (`kontist-cli account`)
-- [ ] validate IBAN (checksum)
-- [ ] prevent invalid characters in purpose, e2eid
+- [x] validate IBAN (checksum)
+- [x] prevent invalid characters in purpose, e2eid
 - [ ] add multiple output formats
     - [ ] `--pretty` as table
     - [ ] `--json` as json (default)
