@@ -98,20 +98,20 @@ See list of "ideas" for upcoming features
         - [ ] convert umlauts to eu, ß to ss
         - [x] normal order
             ```
-            kontist-cli transfer create <iban> <recipient> <amount> --executeAt <executionDate>
+            kontist-cli transfer create [amount] [iban] [recipient] [purpose] \     --executeAt <executionDate>
             ```
         - [x] confirmation mfa
         - [x] timed order
             ```
-            kontist-cli transfer create <iban> <recipient> <amount> \
-                --executeAt <executionDate>
+            kontist-cli transfer create [amount] [iban] [recipient] [purpose] \
+                --at <executionDate>
             ```
-        - [ ] standing order with additional [StandingOrderReoccurenceType](https://kontist.dev/docs/#standingorderreoccurrencetype)
+        - [x] standing order with additional [StandingOrderReoccurenceType](https://kontist.dev/docs/#standingorderreoccurrencetype)
             ```
-            kontist-cli transfer create <iban> <recipient> <amount> \
+            kontist-cli transfer create [amount] [iban] [recipient] [purpose] \
                 --executeAt <executionDate>` \
-                --lastExecutionTime <optionalDate> \
-                --reoccurence <reoccurenceType>;
+                --last <optionalDate> \
+                --repeat <reoccurenceType>;
             ```
     - [ ] update
         - [ ] [update standing order](https://kontist.dev/sdk/#updating-a-standing-order)

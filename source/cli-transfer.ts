@@ -42,11 +42,10 @@ Examples:
   Create a timed order
     ${BIN_NAME} transfer 9200 DE123456789102334 "Undertaker" "Training" --at 2022-04-15
 
-  Create a re-occuring which happens every month until end of 2022
+  Create a monthly re-occuring transaction ending end of 2022
     ${BIN_NAME} transfer 3000 DE123456789102334 "Hulk Hogan" "Wrestling Club Membership fee" \\
       --note "created after entering the wrestling club" \\
       --repeat MONTHLY \\
-      --at 2022-02-14 \\
       --last 2022-12-31
 
   Create a transfer bypassing the confirmation
