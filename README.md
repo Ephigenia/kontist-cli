@@ -77,9 +77,9 @@ See list of "ideas" for upcoming features
         ```
         kontist-cli transfer cancel <id>
         ```
-    - [ ] create
-        - [ ] enable IBAN with spacing
-        - [ ] convert umlauts to eu, ß to ss
+    - [x] create
+        - [x] enable IBAN with spacing
+        - [x] convert umlauts to eu, ß to ss
         - [x] normal order
             ```
             kontist-cli transfer create [amount] [iban] [recipient] [purpose] \     --executeAt <executionDate>

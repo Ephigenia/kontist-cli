@@ -2,6 +2,80 @@ import { expect } from 'chai';
 import { InvalidOptionArgumentError } from 'commander';
 import * as lib from './option-parser';
 
+describe('assertValidIban', function () {
+  it('returns false for invalid IBAN', function () {
+    expect(() => lib.assertValidIban('a')).to.throw(Error);
+  });
+}); // assertValidIban
+
+describe('assertValidSEPAChars', function () {
+  it('is valid', function () {
+    expect(lib.assertValidSEPAChars('Something with RN 2342/212-391')).to.equal(
+      true,
+    );
+  });
+  it('is invalid', function () {
+    expect(() => lib.assertValidSEPAChars('ä')).to.throw(
+      InvalidOptionArgumentError,
+    );
+  });
+}); // assertValidSEPAChars
+
+describe('parseAmount', function () {
+  const valid = [
+    ['1', 1],
+    ['0', 0],
+    ['12381', 12381],
+    ['109', 109],
+  ];
+  valid.forEach(([input, result]) => {
+    it(`${JSON.stringify(input)} to ${JSON.stringify(result)}`, function () {
+      expect(lib.parseAmount(input)).to.equal(result);
+    });
+  });
+
+  const invalid = ['-1', false, {}, ' 1', ' 1 ', '1 ', '2.1', '2.', '2.3'];
+  invalid.forEach((value) => {
+    it(`doesn’t accept ${JSON.stringify(value)}`, function () {
+      expect(() => lib.parseAmount(value)).to.throw(InvalidOptionArgumentError);
+    });
+  });
+}); // parseAmount
+
+describe('parseDateAndTime', function () {
+  const valid = [
+    ['2022-01-01', '2022-01-01T00:00:00.000Z'],
+    ['2022-02-29', '2022-03-01T00:00:00.000Z'],
+  ];
+  valid.forEach(([input, result]) => {
+    it(`Accepts ${JSON.stringify(input)} to ${JSON.stringify(
+      result,
+    )}`, function () {
+      const f = lib.parseDateAndTime(input);
+      expect(f.toISOString()).to.equal(result);
+    });
+  });
+
+  const invalid = [
+    '2022',
+    false,
+    '2022-1-01',
+    '2022-01-1',
+    '1999-01-01',
+    null,
+    {},
+    2,
+    2093,
+  ];
+  invalid.forEach((input) => {
+    it(`doesn’t accept ${JSON.stringify(input)}`, function () {
+      expect(() => lib.parseDateAndTime(input as string)).to.throw(
+        InvalidOptionArgumentError,
+      );
+    });
+  });
+}); // parseDateAndTime
+
 describe('parseIban', function () {
   const valid = [
     'GB94BARC10201530093459',
@@ -44,70 +118,8 @@ describe('parseIban', function () {
   });
 }); // parseIban
 
-describe('assertValidSEPAChars', function () {
-  it('is valid', function () {
-    expect(lib.assertValidSEPAChars('Something with RN 2342/212-391')).to.equal(
-      true,
-    );
+describe('sanitizeSEPAChars', function () {
+  it('converts german umlauts', function () {
+    expect(lib.sanitizeSEPAChars('öäüÖÄÜß')).to.equal('oeaeueOeAeUess');
   });
-  it('is invalid', function () {
-    expect(() => lib.assertValidSEPAChars('ä')).to.throw(
-      InvalidOptionArgumentError,
-    );
-  });
-}); // assertValidSEPAChars
-
-describe('parseDateAndTime', function () {
-  const valid = [
-    ['2022-01-01', '2022-01-01T00:00:00.000Z'],
-    ['2022-02-29', '2022-03-01T00:00:00.000Z'],
-  ];
-  valid.forEach(([input, result]) => {
-    it(`Accepts ${JSON.stringify(input)} to ${JSON.stringify(
-      result,
-    )}`, function () {
-      const f = lib.parseDateAndTime(input);
-      expect(f.toISOString()).to.equal(result);
-    });
-  });
-
-  const invalid = [
-    '2022',
-    false,
-    '2022-1-01',
-    '2022-01-1',
-    '1999-01-01',
-    null,
-    {},
-    2,
-    2093,
-  ];
-  invalid.forEach((input) => {
-    it(`doesn’t accept ${JSON.stringify(input)}`, function () {
-      expect(() => lib.parseDateAndTime(input as string)).to.throw(
-        InvalidOptionArgumentError,
-      );
-    });
-  });
-}); // parseDateAndTime
-
-describe('parseAmount', function () {
-  const valid = [
-    ['1', 1],
-    ['0', 0],
-    ['12381', 12381],
-    ['109', 109],
-  ];
-  valid.forEach(([input, result]) => {
-    it(`${JSON.stringify(input)} to ${JSON.stringify(result)}`, function () {
-      expect(lib.parseAmount(input)).to.equal(result);
-    });
-  });
-
-  const invalid = ['-1', false, {}, ' 1', ' 1 ', '1 ', '2.1', '2.', '2.3'];
-  invalid.forEach((value) => {
-    it(`doesn’t accept ${JSON.stringify(value)}`, function () {
-      expect(() => lib.parseAmount(value)).to.throw(InvalidOptionArgumentError);
-    });
-  });
-}); // parseAmount
+}); // sanitizeSEPAChars

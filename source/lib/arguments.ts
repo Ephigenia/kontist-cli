@@ -1,5 +1,10 @@
 import { Argument, InvalidOptionArgumentError } from 'commander';
-import { assertValidSEPAChars, parseAmount, parseIban } from './option-parser';
+import {
+  assertValidSEPAChars,
+  parseAmount,
+  parseIban,
+  sanitizeSEPAChars,
+} from './option-parser';
 
 export default {
   accountAlias: new Argument('alias', 'name of the account'),
@@ -14,6 +19,7 @@ export default {
   e2eId: new Argument('e2eId', 'end-to-end id/reference string')
     .argOptional()
     .argParser((val: string): string => {
+      val = sanitizeSEPAChars(val);
       if (val.length > 35)
         throw new InvalidOptionArgumentError('To long e2eid');
       assertValidSEPAChars(val);
@@ -29,6 +35,7 @@ export default {
   )
     .argOptional()
     .argParser((val: string): string => {
+      val = sanitizeSEPAChars(val);
       if (val.length > 140)
         throw new InvalidOptionArgumentError('To long purpose');
       assertValidSEPAChars(val);
@@ -38,6 +45,7 @@ export default {
   recipient: new Argument('recipient', 'The name of the transfer recipient')
     .argOptional()
     .argParser((val: string): string => {
+      val = sanitizeSEPAChars(val);
       assertValidSEPAChars(val);
       return val;
     }),

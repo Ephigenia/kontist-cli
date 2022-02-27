@@ -41,19 +41,19 @@ program
     `
 Examples:
   Transfer 30 EUR to Hulk Hogan
-    ${BIN_NAME} transfer 3000 DE123456789102334 "Hulk Hogan" "Wrestling Outfit"
+    ${BIN_NAME} transfer 3000 GB33BUKB20201555555555 "Hulk Hogan" "Wrestling Outfit"
 
   Create a timed order
-    ${BIN_NAME} transfer 9200 DE123456789102334 "Undertaker" "Training" --at 2022-04-15
+    ${BIN_NAME} transfer 9200 GB33BUKB20201555555555 "Undertaker" "Training" --at 2022-04-15
 
   Create a monthly re-occuring transaction ending end of 2022
-    ${BIN_NAME} transfer 3000 DE123456789102334 "Hulk Hogan" "Wrestling Club Membership fee" \\
+    ${BIN_NAME} transfer 3000 GB33BUKB20201555555555 "Hulk Hogan" "Wrestling Club Membership fee" \\
       --note "created after entering the wrestling club" \\
       --repeat MONTHLY \\
       --last 2022-12-31
 
   Create a transfer bypassing the confirmation
-    ${BIN_NAME} transfer --yes 9200 DE123456789102334 "Mr. Clever" "Math Tutoring"
+    ${BIN_NAME} transfer --yes 9200 GB33BUKB20201555555555 "Mr. Clever" "Math Tutoring"
   `,
   )
   .action(run)
@@ -77,7 +77,6 @@ async function run(
   }>();
 
   // TODO add double-confirmation for all budgets above a specific limit (20?)
-
   const parameters: CreateTransferInput = {
     amount,
     ...(options.at && { executeAt: options.at }),
