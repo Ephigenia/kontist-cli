@@ -1,6 +1,6 @@
-import Conf from 'conf/dist/source';
 import { Client } from 'kontist';
-import { KontistConfiguration } from './config';
+import { KontistCliConfiguration } from './config/class';
+import { KontistAccountConfiguration } from './config/schema';
 import { BIN_NAME } from './constants';
 
 export class ApplicationError extends Error {
@@ -18,7 +18,9 @@ export class ApplicationConfigurationError extends ApplicationError {
 export class ApplicationMissingConfigurationError extends ApplicationConfigurationError {
   constructor(variableName: string) {
     const message =
-      `The application requires the configuration ${variableName} to be ` +
+      `The application requires the configuration ${JSON.stringify(
+        variableName,
+      )} to be ` +
       `properly defined. Please check \`${BIN_NAME} login\` to set ` +
       `everything up.`;
     super(message);
@@ -26,24 +28,33 @@ export class ApplicationMissingConfigurationError extends ApplicationConfigurati
   }
 }
 
-export async function createDefaultClient(config: Conf<KontistConfiguration>) {
+export function validateAccountConfig(
+  accountConfig: KontistAccountConfiguration,
+): boolean {
   const requiredVariables = ['clientId', 'accessToken', 'refreshToken'];
   for (const varname of requiredVariables) {
-    const value = config.get(varname);
+    const value = accountConfig[varname as keyof KontistAccountConfiguration];
     if (value) continue;
     throw new ApplicationMissingConfigurationError(varname);
   }
+  return true;
+}
 
+export async function createAccountClient(
+  accountName = 'default',
+  config: KontistCliConfiguration,
+) {
+  const accountConfig = config.getAccountByAlias(accountName);
+  validateAccountConfig(accountConfig);
   const client = new Client({
-    clientId: config.get('clientId'),
-    clientSecret: config.get('clientSecret'),
+    clientId: accountConfig.clientId,
+    clientSecret: accountConfig.clientSecret,
     scopes: config.get('scopes'),
   });
-
   // use the access and refresh token from the configuration
   client.auth.tokenManager.setToken(
-    config.get('accessToken'),
-    config.get('refreshToken'),
+    accountConfig.accessToken,
+    accountConfig.refreshToken,
   );
   await client.auth.tokenManager.refresh();
 

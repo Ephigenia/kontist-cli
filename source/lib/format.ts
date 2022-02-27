@@ -1,6 +1,6 @@
 import Conf from 'conf/dist/source';
 import { Transaction } from 'kontist/dist/lib/graphql/schema';
-import { KontistConfiguration } from './config';
+import { KontistConfiguration } from './config/schema';
 
 export function formatCurrency(
   value: number,

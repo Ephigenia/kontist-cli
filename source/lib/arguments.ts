@@ -2,6 +2,7 @@ import { Argument, InvalidOptionArgumentError } from 'commander';
 import { assertValidSEPAChars, parseAmount, parseIban } from './option-parser';
 
 export default {
+  accountAlias: new Argument('alias', 'name of the account'),
   amount: new Argument(
     'amount',
     'The amount of the transfer in cents (f.e. 2134 are 21.34)',

@@ -1,13 +1,18 @@
-import Conf, { Schema } from 'conf';
+import { Schema } from 'conf';
 
-export interface KontistConfiguration {
+export interface KontistAccountConfiguration {
+  name: string;
   accessToken: string;
   refreshToken: string;
   clientId: string;
   clientSecret?: string;
-  scopes?: string[];
+}
+
+export interface KontistConfiguration {
+  accounts: KontistAccountConfiguration[];
   currency?: string;
   locale: string;
+  scopes?: string[];
   timeZone: string;
 }
 
@@ -23,12 +28,26 @@ export const SCOPES_DEFAULT = [
 
 // schema definition for validating configuration values
 // SEE https://json-schema.org/understanding-json-schema/
-const schema: Schema<KontistConfiguration> = {
-  accessToken: {
-    type: 'string',
-  },
-  clientId: {
-    type: 'string',
+export const schema: Schema<KontistConfiguration> = {
+  accounts: {
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        accessToken: {
+          type: 'string',
+        },
+        clientId: {
+          type: 'string',
+        },
+        name: {
+          type: 'string',
+        },
+        refreshToken: {
+          type: 'string',
+        },
+      },
+    },
   },
   currency: {
     // ISO 4217 currency symbol used for formating money values
@@ -40,9 +59,6 @@ const schema: Schema<KontistConfiguration> = {
   },
   locale: {
     // optional locale to be used when formatting money values
-    type: 'string',
-  },
-  refreshToken: {
     type: 'string',
   },
   scopes: {
@@ -57,11 +73,3 @@ const schema: Schema<KontistConfiguration> = {
     type: 'string',
   },
 };
-
-const config = new Conf<KontistConfiguration>({
-  projectName: 'kontist-cli-dev',
-  projectVersion: '0.0.0-dev',
-  schema,
-});
-
-export default config;

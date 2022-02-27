@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { CreateTransferInput } from 'kontist/dist/lib/graphql/schema';
+import {
+  CreateTransferInput,
+  StandingOrderReoccurrenceType,
+} from 'kontist/dist/lib/graphql/schema';
 import * as readlineSync from 'readline-sync';
 
-import { createDefaultClient } from './lib/client';
 import config from './lib/config';
-import { OutputFormat, print, printF } from './lib/output';
 import options from './lib/options';
 import args from './lib/arguments';
+import { createAccountClient } from './lib/client';
+import { OutputFormat, print, printF } from './lib/output';
 import { BIN_NAME } from './lib/constants';
 
 const program = new Command();
@@ -22,6 +25,7 @@ program
   .addArgument(args.recipient)
   .addArgument(args.purpose)
   .addArgument(args.e2eId)
+  .addOption(options.account)
   .addOption(options.at)
   .addOption(options.dryRun)
   .option(
@@ -62,9 +66,15 @@ async function run(
   purpose?: string,
   e2eId?: string,
 ) {
-  const options = program.opts();
-  // TODO validate amount
-  // TODO validate recipient
+  const options = program.opts<{
+    account: string;
+    at: string;
+    dryRun: boolean;
+    last: string;
+    note: string;
+    repeat: StandingOrderReoccurrenceType;
+    yes: boolean;
+  }>();
 
   // TODO add double-confirmation for all budgets above a specific limit (20?)
 
@@ -100,7 +110,7 @@ async function run(
     }
   }
 
-  const client = await createDefaultClient(config);
+  const client = await createAccountClient(options.account, config);
 
   const confirmationId = await client.models.transfer.createOne(parameters);
 

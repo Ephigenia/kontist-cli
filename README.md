@@ -10,6 +10,7 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 
 # Features
 
+- login and use multiple account(s)
 - show status & current balance
 - list & filter transaction(s)
 - subscribe to incoming transactions
@@ -32,35 +33,18 @@ See list of "ideas" for upcoming features
     - [ ] `--pretty` as table
     - [ ] `--json` as json (default)
     - [ ] `--plain` as tsv (easy for additional processing with `xargs`)
-- [ ] multi-account
-    - [ ] add account (name defaults to "default")
+- [x] multi-account
+    - [x] add account (name defaults to "default")
         ```
-        kontist-cli account login <client-id> <username>
+        kontist-cli account login --account myalias <client-id> <username>
         ```
-    - [ ] add account with named alias
+    - [x] add account with named alias
         ```
         kontist-cli account login --name myAlias <client-id> <username>
         ```
-    - [ ] list accounts
-        ```
-        kontist-cli accounts list
-
-        | name     | clientId | username |
-        |----------|----------|----------|
-        | default  |          |          |
-        ```
-    - [ ] remove account with alias
-        ```
-        kontist-cli account delete <id>
-        ```
-    - [ ] remove all accounts
-        ```
-        kontist-cli account delete all
-        ```
-    - [ ] use specific account
-    
-        Example with transfer for the account with the name "accountName":
-    
+    - [x] list accounts `kontist-cli accounts list`
+    - [x] remove account with alias `kontist-cli account delete <alias>`
+    - [x] use specific account
         ```
         kontist-cli transfer create --account accountName <iban> <recipient> <amount>
         ```

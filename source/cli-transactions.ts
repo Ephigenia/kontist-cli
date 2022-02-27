@@ -1,24 +1,25 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-
-import { BIN_NAME } from './lib/constants';
-import { createDefaultClient } from './lib/client';
-import { formatTransaction } from './lib/format';
-import config from './lib/config';
-import { OutputFormat, printF } from './lib/output';
-import options from './lib/options';
-import args from './lib/arguments';
 import {
   AccountTransactionsArgs,
   BaseOperator,
   TransactionFilter,
 } from 'kontist/dist/lib/graphql/schema';
 
+import config from './lib/config';
+import options from './lib/options';
+import args from './lib/arguments';
+import { BIN_NAME } from './lib/constants';
+import { createAccountClient } from './lib/client';
+import { formatTransaction } from './lib/format';
+import { OutputFormat, printF } from './lib/output';
+
 const program = new Command();
 program
   .description(`list transaction`)
   .addArgument(args.query)
   // TODO add pagination
+  .addOption(options.account)
   .addOption(options.dryRun)
   .addOption(options.from)
   .addOption(options.limit)
@@ -59,9 +60,18 @@ Examples:
   .parseAsync();
 
 async function run(query?: string) {
-  const options = program.opts();
+  const options = program.opts<{
+    account: string;
+    dryRun: boolean;
+    from: string;
+    iban: string[];
+    incoming: boolean;
+    limit: number;
+    outgoing: boolean;
+    to: string;
+  }>();
 
-  const client = await createDefaultClient(config);
+  const client = await createAccountClient(options.account, config);
 
   // use options and arguments to bild the query arguments
   const transactionFilter: TransactionFilter = {};
