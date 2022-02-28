@@ -25,5 +25,7 @@ describe('formatDateTime', function () {
     const date = new Date('2022-02-27T17:27:30.131Z');
     expect(formatDateTime(date, 'DE-de')).to.equal('27.2.2022, 18:27:30');
   });
-  it('returns an empty string on invalid date');
+  it('returns Invalid Date', function () {
+    expect(formatDateTime('lorem ipsum', 'DE-de')).to.equal('Invalid Date');
+  });
 }); // formatCurrency
