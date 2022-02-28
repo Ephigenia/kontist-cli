@@ -58,7 +58,7 @@
     "prepare": "husky install",
     "prepublish": "npm run -s build",
     "start": "node dist/cli.js",
-    "test": "nyc --reporter=text --reporter=text-summary --reporter=lcov ts-mocha --watch-extensions ts --watch-files source source/**/*.ts",
+    "test": "TZ=Europe/Berlin nyc --reporter=text --reporter=text-summary --reporter=lcov ts-mocha --watch-extensions ts --watch-files source source/**/*.ts",
     "tdd": "npm run -s test -- --watch",
     "watch": "tsc -w"
   },
