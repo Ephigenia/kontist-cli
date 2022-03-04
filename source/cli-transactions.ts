@@ -38,7 +38,7 @@ Examples:
     ${BIN_NAME} transactions --limit 5
 
   In specific time frame
-  ${BIN_NAME} transactions --from 2022-02-01 --to 2022-02-28
+   ${BIN_NAME} transactions --from 2022-02-01 --to 2022-02-28
 
   Use JSTBL for selective display as table
     ${BIN_NAME} transactions | jstbl show:valutaDateF,amountF,name,purpose

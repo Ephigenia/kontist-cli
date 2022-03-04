@@ -1,14 +1,10 @@
 *Project is work in progress.*
 
-Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interface)) Tool for using the [Kontist](https://kontist.com/) API which under the hood relies on their marvelous [GraphQL API](https://kontist.dev/docs/#schema-reference) [Kontist Javascript SDK](https://kontist.dev/sdk/#using-the-sdk)
+Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interface)) Tool for using the [Kontist](https://kontist.com/) API which under the hood relies on their marvelous [GraphQL API](https://kontist.dev/docs/#schema-reference) [Kontist Javascript SDK](https://kontist.dev/sdk/
+#using-the-sdk)
 
-- [Features](#features)
-- [Ideas](#ideas)
-- [Setup](#setup)
-- [Examples](#examples)
-- [Other Projects / Bookmarks](#other-projects--bookmarks)
 
-# Features
+# Overview
 
 - login and use multiple account(s)
 - show status & current balance
@@ -17,7 +13,68 @@ Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interfa
 - create transfer
 - list, show, block, unblock card(s)
 
-See list of "ideas" for upcoming features
+See [list of "ideas"](#ideas) for upcoming features …
+
+
+
+# Install
+
+    npm install kontist-cli
+
+## NPX
+
+    npx kontist-cli
+
+
+
+# Setup
+
+Obtain valid client id for authentication. Request your client id in the API Client Management on https://kontist.dev/client-management/.
+
+Create Access- & Refresh Token (valid for 1year) and store in system user preferences (using [nconf package](https://www.npmjs.com/package/conf)):
+
+    kontist-cli login <oauth-client-id> <username>
+
+You’ll be promted for the password. There’s also the ability to [setup multiple accounts](#accounts).
+
+
+# Examples
+
+The command-line-tool does not include any table formater or filtering mechanism as there are other nice tools for that like [table-printer-cli](https://www.npmjs.com/package/table-printer-cli) for formatting JSON output to a nice-looking table and [jq](https://stedolan.github.io/jq/) for transforming and filtering JSON.
+
+## Transactions
+
+Both tools in combination can be used to create a nice-looking, customizable list of transactions:
+
+    kontist-cli transactions | jq -c 'map({bookingDate,valutaDate,amount,name,iban})' | npx table-printer-cli -s
+
+List transactions between two dates:
+
+    kontist-cli transactions --from 2022-02-01 --to 2022-02-28
+
+## Transfer
+
+Create a standing order that repeats every month
+
+    kontist-cli transfer 3000 GB33BUKB20201555555555 "Hulk Hogan" "Wrestling Club Membership fee" \
+        --note "created after entering the wrestling club" \
+        --repeat MONTHLY \
+        --last 2022-12-31
+
+Wait until you receive the confirmation code and enter it when prompted. You’ll also get a confirmation before the transaction is made.
+
+## Locale
+
+Some commands rely on the systems `LC_ALL`, `LC_TIME`, or `LC_NUMERIC` variables to format monetary values or provide additional formatted dates. The `balance` sub-command:
+
+    $ LC_ALL=de-de kontist-cli balance
+    50,20 €
+
+## Output
+
+All comands print out JSON to make it easy to filter and process the output using [jq](https://stedolan.github.io/jq/) and other tools like [ctp([table-printer-cli](https://www.npmjs.com/package/table-printer-cli))
+
+
 
 # Ideas 
 
@@ -136,27 +193,7 @@ See list of "ideas" for upcoming features
     - [ ] setup semantic release
     - [ ] setup discussions
 
-# Setup
 
-- Valid client id for authentication. Request your client id in the API Client Management on https://kontist.dev/client-management/.
-- Create Access- & Refresh Token (valid for 1year) and store in system user preferences:
-    ```
-    kontist-cli login <oauth-client-id> <username>
-    ```
-    you’ll be promted for the password
-
-# Examples
-
-The command-line-tool does not include any table formater or filtering mechanism as there are other nice tools for that like [table-printer-cli](https://www.npmjs.com/package/table-printer-cli) for formatting JSON output to a nice-looking table and [jq](https://stedolan.github.io/jq/) for transforming and filtering JSON.
-
-Both tools in combination can be used to create a nice-looking, customizable list of transactions:
-
-    kontist-cli transactions | jq -c 'map({bookingDate,valutaDate,amount,name,iban})' | npx table-printer-cli -s
-
-Some other command rely on the systems `LC_ALL`, `LC_TIME`, or `LC_NUMERIC` variables to format monetary values or provide additional formatted dates. The `balance` sub-command:
-
-    $ LC_ALL=de-de kontist-cli balance
-    50,20 €
 
 # Other Projects / Bookmarks
 

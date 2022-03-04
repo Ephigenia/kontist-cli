@@ -56,10 +56,12 @@
     "lint:fix": "npm run -s lint -- --fix",
     "lint": "eslint source/**/*.ts",
     "prepare": "husky install",
-    "prepublish": "npm run -s build",
+    "prepublish": "npm run -s build; npm run test;",
     "start": "node dist/cli.js",
     "test": "TZ=Europe/Berlin nyc --reporter=text --reporter=text-summary --reporter=lcov ts-mocha --watch-extensions ts --watch-files source source/**/*.ts",
     "tdd": "npm run -s test -- --watch",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
     "watch": "tsc -w"
   },
   "dependencies": {
@@ -67,6 +69,7 @@
     "conf": "10.1.1",
     "ibantools": "4.1.4",
     "kontist": "0.37.0",
+    "pinst": "3.0.0",
     "readline-sync": "1.4.10"
   },
   "devDependencies": {
@@ -76,7 +79,7 @@
     "@types/chai": "4.3.0",
     "@types/commander": "2.12.2",
     "@types/mocha": "9.1.0",
-    "@types/node": "17.0.10",
+    "@types/node": "17.0.21",
     "@types/readline-sync": "1.4.4",
     "@typescript-eslint/eslint-plugin": "5.13.0",
     "@typescript-eslint/parser": "5.13.0",
