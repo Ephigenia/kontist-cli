@@ -68,7 +68,7 @@
     "commander": "9.0.0",
     "conf": "10.1.1",
     "ibantools": "4.1.4",
-    "kontist": "0.37.0",
+    "kontist": "0.38.1",
     "pinst": "3.0.0",
     "readline-sync": "1.4.10"
   },
