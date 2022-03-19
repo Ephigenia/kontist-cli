@@ -1,7 +1,10 @@
 *Project is work in progress.*
 
-[![MIT License](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)[![NPM Package](https://badge.fury.io/js/kontist-cli.svg)](https://www.npmjs.com/package/kontist-cli)
-[![NPM Downloads](https://img.shields.io/npm/dt/kontist-cli.svg)](https://www.npmjs.com/package/kontist-cli)[![Rate on Openbase](https://badges.openbase.com/js/rating/kontist-cli.svg)](https://openbase.com/js/kontist-cli?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![test](https://github.com/Ephigenia/kontist-cli/actions/workflows/test.yml/badge.svg)](https://github.com/Ephigenia/kontist-cli/actions/workflows/test.yml)
+[![MIT License](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![NPM Package](https://badge.fury.io/js/kontist-cli.svg)](https://www.npmjs.com/package/kontist-cli)
+[![NPM Downloads](https://img.shields.io/npm/dt/kontist-cli.svg)](https://www.npmjs.com/package/kontist-cli)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/kontist-cli.svg)](https://openbase.com/js/kontist-cli?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 Command Line Interface ([CLI](https://en.wikipedia.org/wiki/Command-line_interface)) Tool for using the [Kontist](https://kontist.com/) API which under the hood relies on their marvelous [GraphQL API](https://kontist.dev/docs/#schema-reference) [Kontist Javascript SDK](https://kontist.dev/sdk/#using-the-sdk)
 
