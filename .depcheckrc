@@ -1,0 +1,9 @@
+# depcheck configuration
+# SEE https://www.npmjs.com/package/depcheck#api
+
+# if you add ignores also annotate why the package is ignored
+# keep list ordered at all times
+ignores:
+  - "@commitlint/cli"
+  - "@commitlint/config-angular"
+  - "@istanbuljs/nyc-config-typescript"
