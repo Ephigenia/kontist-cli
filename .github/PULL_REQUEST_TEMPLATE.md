@@ -1,11 +1,3 @@
----
-name: Feature Added
-about: Suggest an idea for this project
-title: 'feat(scope): description'
-labels: 'feature'
-assignees: 'Ephigenia'
----
-
 <!-- make sure the title of the PR follows the angular commit guidelines as it will appear in the changelog -->
 
 # Pull Request
