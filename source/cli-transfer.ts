@@ -12,6 +12,7 @@ import args from './lib/arguments';
 import { createAccountClient } from './lib/client';
 import { OutputFormat, print, printF } from './lib/output';
 import { BIN_NAME } from './lib/constants';
+import { formatCurrency } from './lib/format';
 
 const program = new Command();
 
@@ -98,7 +99,15 @@ async function run(
   // TODO double confirm high amount(s)?
 
   if (!options.yes) {
-    print('Please confirm that you want to make the following transfer:\n');
+    // bold
+    const amount = formatCurrency(
+      parameters.amount,
+      config.get('locale') as string,
+      config.get('currency'),
+    );
+    print(
+      `Please confirm that you want to transfer ${amount} the following transfer:\n`,
+    );
     print(parameters);
     // TODO research common option display, uppercase for default, but which order
     // TODO add option to disable confirmation
