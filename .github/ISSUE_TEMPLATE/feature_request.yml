@@ -1,0 +1,21 @@
+name: 💡 Feature Request
+description: Suggest an idea for the project
+title: 'feat: '
+labels:
+  - enhancement
+assignees:
+  - Ephigenia
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+      - label: I have searched the [existing issues](https://github.com/Ephigenia/kontist-cli/issues)
+        required: true
+  - type: textarea
+    attributes:
+      label: Describe the Feature Request
+      description: A clear and concise description of what the feature does.
+    validations:
+      required: true
