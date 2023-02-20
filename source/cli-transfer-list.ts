@@ -57,7 +57,7 @@ async function main() {
     printF(OutputFormat.JSON, params);
     process.exit(0);
   }
-  const [sepa, standing, timed, virtual] = await Promise.all([
+  const [sepa, standing, timed] = await Promise.all([
     client.models.transfer.fetchAll({
       ...params,
       type: TransferType.SepaTransfer,
@@ -70,12 +70,8 @@ async function main() {
       ...params,
       type: TransferType.TimedOrder,
     }),
-    client.models.transfer.fetchAll({
-      ...params,
-      type: TransferType.VirtualBooking,
-    }),
   ]);
 
   // TODO status ACTIVE … and others should be visible
-  return printF(OutputFormat.JSON, { sepa, standing, timed, virtual });
+  return printF(OutputFormat.JSON, { sepa, standing, timed });
 }
